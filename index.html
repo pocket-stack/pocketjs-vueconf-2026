@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PocketJS 与 Vue Vapor 的嵌入式 GUI 探索 — VueConf 2026</title>
+<style>
+  :root {
+    --green: #42b883;
+    --green-soft: #6fd3a6;
+    --slate: #35495e;
+    --bg: #0b111d;
+    --panel: rgba(53, 73, 94, 0.28);
+    --panel-line: rgba(66, 184, 131, 0.22);
+    --text: #e9f0f8;
+    --dim: #93a5b8;
+    --code-bg: #0e1626;
+    --vite-a: #646cff;
+    --vite-b: #bd34fe;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: radial-gradient(1200px 800px at 78% -10%, rgba(66,184,131,.10), transparent 60%),
+                radial-gradient(900px 700px at -10% 110%, rgba(53,73,94,.55), transparent 60%),
+                var(--bg);
+    color: var(--text);
+    font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+  }
+  #viewport { position: fixed; inset: 0; display: grid; place-items: center; }
+  #stage { width: 1280px; height: 720px; position: relative; transform-origin: center center; }
+
+  /* ---------- slides ---------- */
+  .slide {
+    position: absolute; inset: 0; padding: 68px 92px;
+    display: flex; flex-direction: column; justify-content: center; gap: 26px;
+    opacity: 0; visibility: hidden; transform: translateY(10px);
+    transition: opacity .32s ease, transform .32s ease, visibility .32s;
+  }
+  .slide.active { opacity: 1; visibility: visible; transform: none; }
+  .slide.bleed { padding: 0; justify-content: flex-end; }
+
+  .kicker {
+    color: var(--green); font-size: 17px; font-weight: 700;
+    letter-spacing: .28em; text-transform: uppercase;
+  }
+  h1 { font-size: 56px; line-height: 1.22; margin: 0; font-weight: 800; letter-spacing: .01em; }
+  h2 { font-size: 42px; line-height: 1.25; margin: 0; font-weight: 800; }
+  .sub { color: var(--dim); font-size: 22px; line-height: 1.7; margin: 0; }
+  .accent { color: var(--green); }
+  .vite {
+    background: linear-gradient(120deg, var(--vite-a), var(--vite-b));
+    -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800;
+  }
+
+  .cards { display: flex; gap: 20px; }
+  .card {
+    flex: 1; background: var(--panel); border: 1px solid var(--panel-line);
+    border-radius: 16px; padding: 24px 26px;
+  }
+  .card b { display: block; font-size: 21px; margin-bottom: 10px; color: var(--text); }
+  .card p { margin: 0; color: var(--dim); font-size: 17.5px; line-height: 1.65; }
+
+  .chips { display: flex; gap: 12px; }
+  .chip {
+    border: 1px solid var(--panel-line); border-radius: 999px;
+    padding: 7px 18px; font-size: 16px; color: var(--green-soft);
+    font-family: "SF Mono", Menlo, monospace; background: rgba(66,184,131,.08);
+  }
+
+  /* ---------- code ---------- */
+  pre.code {
+    margin: 0; background: var(--code-bg); border: 1px solid var(--panel-line);
+    border-radius: 16px; padding: 26px 30px; overflow: hidden;
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 18.5px; line-height: 1.62;
+    color: #c9d6e6;
+  }
+  .kw { color: #7bd0f7; } .str { color: #e8c98d; } .fn { color: #b7a6f5; }
+  .cmp { color: var(--green-soft); } .num { color: #f2928c; } .cm { color: #5c7089; }
+  .hl { background: rgba(66,184,131,.16); display: inline-block; width: 100%; border-radius: 6px; }
+
+  /* ---------- video ---------- */
+  .video-frame {
+    position: relative; border-radius: 18px; overflow: hidden;
+    border: 1px solid var(--panel-line); background: #000;
+    box-shadow: 0 24px 70px rgba(0,0,0,.5);
+  }
+  .video-frame video { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .video-frame.missing::after {
+    content: "素材待录制 → " attr(data-missing);
+    position: absolute; inset: 0; display: grid; place-items: center;
+    background: repeating-linear-gradient(45deg, #0e1626, #0e1626 24px, #101a2c 24px, #101a2c 48px);
+    color: var(--dim); font-size: 20px; font-family: "SF Mono", Menlo, monospace;
+  }
+  .bleed .video-frame { position: absolute; inset: 0; border-radius: 0; border: none; }
+  .caption {
+    position: relative; z-index: 2; margin: 0 64px 56px;
+    background: rgba(11,17,29,.72); backdrop-filter: blur(10px);
+    border: 1px solid var(--panel-line); border-radius: 14px; padding: 18px 26px;
+    width: fit-content; max-width: 900px;
+  }
+  .caption b { font-size: 24px; display: block; }
+  .caption span { color: var(--dim); font-size: 16px; }
+
+  .split { display: flex; gap: 36px; align-items: stretch; min-height: 0; }
+  .split > .left { flex: 1.05; display: flex; flex-direction: column; gap: 22px; justify-content: center; }
+  .split > .right { flex: 1.4; display: flex; flex-direction: column; justify-content: center; }
+  .split .video-frame { aspect-ratio: 16/9; }
+
+  /* ---------- compare / diagram ---------- */
+  .compare { display: flex; gap: 24px; }
+  .lane {
+    flex: 1; border-radius: 16px; padding: 22px 24px;
+    border: 1px solid rgba(147,165,184,.25); background: rgba(147,165,184,.06);
+  }
+  .lane.win { border-color: var(--panel-line); background: rgba(66,184,131,.07); }
+  .lane h3 { margin: 0 0 16px; font-size: 20px; color: var(--dim); font-weight: 700; }
+  .lane.win h3 { color: var(--green); }
+  .node {
+    border: 1px solid rgba(147,165,184,.3); background: rgba(11,17,29,.6);
+    border-radius: 10px; padding: 10px 16px; font-size: 17px; text-align: center;
+    font-family: "SF Mono", Menlo, monospace; color: #c9d6e6;
+  }
+  .node.heavy { border-style: dashed; color: var(--dim); }
+  .node.green { border-color: var(--panel-line); color: var(--green-soft); }
+  .arrow { text-align: center; color: var(--dim); font-size: 15px; padding: 4px 0; }
+  .stat-line { font-size: 24px; margin: 0; }
+  .stat-line b { color: var(--green); font-size: 30px; font-family: "SF Mono", Menlo, monospace; }
+
+  .journey { display: flex; gap: 34px; align-items: center; }
+  .journey .chain { flex: 1.35; display: flex; flex-direction: column; }
+  .zone { border-left: 3px solid; padding: 10px 0 10px 22px; margin-left: 4px; }
+  .zone .zlabel {
+    font-size: 14px; letter-spacing: .22em; font-weight: 700; margin-bottom: 8px;
+    font-family: "SF Mono", Menlo, monospace;
+  }
+  .zone.js { border-color: var(--green); } .zone.js .zlabel { color: var(--green); }
+  .zone.rust { border-color: #e0885a; } .zone.rust .zlabel { color: #e0885a; }
+  .zone.gpu { border-color: #7bd0f7; } .zone.gpu .zlabel { color: #7bd0f7; }
+  .zone .node { text-align: left; width: fit-content; min-width: 420px; margin-bottom: 8px; }
+  .zone .node:last-child { margin-bottom: 0; }
+  .journey aside { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+  .journey aside .no {
+    font-size: 26px; font-weight: 800; color: var(--text);
+  }
+  .journey aside .no s { color: var(--dim); font-weight: 600; }
+
+  .bigsay { font-size: 52px; font-weight: 800; line-height: 1.4; margin: 0; }
+  .bigsay .accent { display: inline; }
+
+  .final p { font-size: 30px; line-height: 1.9; margin: 0; }
+  .final .last { font-size: 40px; font-weight: 800; color: var(--green); margin-top: 18px; }
+
+  /* Vue-ish chevron motif */
+  .chev { position: absolute; pointer-events: none; }
+  .chev.big {
+    right: -120px; top: -160px; width: 640px; height: 560px; opacity: .5;
+    background: conic-gradient(from 210deg at 50% 18%, rgba(66,184,131,.18), transparent 120deg);
+    clip-path: polygon(50% 100%, 0 0, 26% 0, 50% 42%, 74% 0, 100% 0);
+  }
+  .chev.small {
+    right: 40px; bottom: 36px; width: 44px; height: 40px; opacity: .9;
+    background: linear-gradient(180deg, var(--green), #2f8f66);
+    clip-path: polygon(50% 100%, 0 0, 26% 0, 50% 42%, 74% 0, 100% 0);
+  }
+
+  /* ---------- HUD ---------- */
+  #hud { position: fixed; inset: auto 0 0 0; z-index: 50; }
+  #bar { height: 3px; background: linear-gradient(90deg, var(--green), var(--green-soft)); transition: width .25s ease; }
+  #meta {
+    display: flex; justify-content: space-between; padding: 8px 16px 10px;
+    color: rgba(147,165,184,.55); font-size: 12.5px; font-family: "SF Mono", Menlo, monospace;
+  }
+  #notes {
+    position: fixed; left: 50%; bottom: 46px; transform: translateX(-50%);
+    width: min(880px, 86vw); z-index: 60;
+    background: rgba(11,17,29,.92); border: 1px solid var(--panel-line);
+    border-radius: 14px; padding: 16px 22px; backdrop-filter: blur(12px);
+    font-size: 15.5px; line-height: 1.7; color: var(--text);
+  }
+  #notes .t { color: var(--green); font-family: "SF Mono", Menlo, monospace; margin-right: 12px; }
+</style>
+</head>
+<body>
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- 0 · 冷开场 -->
+    <section class="slide bleed">
+      <div class="video-frame" data-missing="assets/videos/hero-psp.mp4">
+        <video src="assets/videos/hero-psp.mp4" muted loop playsinline preload="auto" data-req></video>
+      </div>
+      <div class="caption">
+        <b>JSX + 细粒度响应式 —— 跑在 2004 年的 PSP 上</b>
+        <span>真机实拍 · 无剪辑 · 60 fps</span>
+      </div>
+    </section>
+
+    <!-- 1 · 标题 -->
+    <section class="slide">
+      <div class="chev big"></div>
+      <p class="kicker">VueConf 2026 · 闪电分享</p>
+      <h1>PocketJS 与 <span class="accent">Vue Vapor</span> 的<br/>嵌入式 GUI 探索</h1>
+      <p class="sub">Yifeng "Evan" Wang &nbsp;·&nbsp; pocketjs.dev</p>
+      <div class="chev small"></div>
+    </section>
+
+    <!-- 2 · PocketJS 是什么 -->
+    <section class="slide">
+      <p class="kicker">PocketJS 是什么</p>
+      <h2>一个跑在游戏掌机上的 UI 框架</h2>
+      <div class="cards">
+        <div class="card"><b>写法是前端的</b><p>JSX + Tailwind 子集，样式、字体、动画全部在编译期烘焙成二进制。</p></div>
+        <div class="card"><b>运行时是系统级的</b><p>Rust core 负责布局与渲染，直接生成 GPU 显示列表。</p></div>
+        <div class="card"><b>框架层可插拔</b><p>Solid 与 <span class="accent">Vue Vapor</span> 是两个一等公民，驱动同一棵原生树。</p></div>
+      </div>
+      <div class="chips">
+        <span class="chip">MIPS 333 MHz</span><span class="chip">32 MB RAM</span>
+        <span class="chip">480 × 272</span><span class="chip">锁 60 fps</span>
+      </div>
+    </section>
+
+    <!-- 3 · 代码：就是 Vue -->
+    <section class="slide">
+      <p class="kicker">掌机上的 Vue 应用</p>
+      <pre class="code"><code><span class="hl"><span class="kw">import</span> { onMounted, ref } <span class="kw">from</span> <span class="str">"vue"</span>;</span>
+<span class="kw">import</span> { mount } <span class="kw">from</span> <span class="str">"@pocketjs/framework/vue-vapor"</span>;
+<span class="kw">import</span> { View, Text } <span class="kw">from</span> <span class="str">"@pocketjs/framework/vue-vapor/components"</span>;
+
+<span class="kw">export default function</span> <span class="fn">App</span>() {
+  <span class="kw">const</span> count = <span class="fn">ref</span>(<span class="num">0</span>);
+  <span class="fn">onMounted</span>(() =&gt; console.<span class="fn">log</span>(<span class="str">"mounted on a real PSP"</span>));
+
+  <span class="kw">return</span> (
+    &lt;<span class="cmp">View</span> class=<span class="str">"p-4 flex-col gap-2"</span>&gt;
+      &lt;<span class="cmp">View</span> focusable onPress={() =&gt; count.value++}&gt;
+        &lt;<span class="cmp">Text</span> class=<span class="str">"text-sm text-blue-600"</span>&gt;Count: {count.value}&lt;/<span class="cmp">Text</span>&gt;
+      &lt;/<span class="cmp">View</span>&gt;
+      {count.value &gt; <span class="num">2</span> ? &lt;<span class="cmp">Text</span>&gt;Vue Vapor, native tree.&lt;/<span class="cmp">Text</span>&gt; : <span class="kw">null</span>}
+    &lt;/<span class="cmp">View</span>&gt;
+  );
+}
+<span class="fn">mount</span>(App);</code></pre>
+      <p class="sub">不是"像 Vue"—— <span class="accent">import 的就是 vue</span>：真的 ref，真的 onMounted，真的 Vapor 编译。</p>
+    </section>
+
+    <!-- 4 · 为什么是 Vapor -->
+    <section class="slide">
+      <p class="kicker">为什么是 Vapor</p>
+      <div class="compare">
+        <div class="lane">
+          <h3>vdom 时代：自定义渲染器</h3>
+          <div class="node">组件</div><div class="arrow">↓</div>
+          <div class="node heavy">虚拟 DOM 树</div><div class="arrow">↓</div>
+          <div class="node heavy">diff / patch 协调运行时</div><div class="arrow">↓</div>
+          <div class="node">宿主节点接口</div>
+        </div>
+        <div class="lane win">
+          <h3>Vapor：编译产物直达节点</h3>
+          <div class="node">组件</div><div class="arrow">↓ 编译期展开</div>
+          <div class="node green">createElement / insert / setProp</div>
+          <div class="arrow">↓</div>
+          <div class="node green">PocketJS 原生树</div>
+        </div>
+      </div>
+      <p class="stat-line">把 Vue 接上 PSP 的渲染绑定：<b>244 行</b>&nbsp;&nbsp;<span class="sub">（渲染器 108 + DOM 门面 136；整个 Vue 适配层 &lt; 1200 行）</span></p>
+    </section>
+
+    <!-- 5 · 一次 count.value++ 的旅程 -->
+    <section class="slide">
+      <p class="kicker">一次 count.value++ 的旅程</p>
+      <div class="journey">
+        <div class="chain">
+          <div class="zone js">
+            <div class="zlabel">JAVASCRIPT</div>
+            <div class="node">ref 变更 → Vapor effect 触发</div>
+            <div class="node">setProp(节点镜像, "text", …)</div>
+          </div>
+          <div class="zone rust">
+            <div class="zlabel">RUST CORE</div>
+            <div class="node">指令流 ops → 布局 / 二进制样式表</div>
+          </div>
+          <div class="zone gpu">
+            <div class="zlabel">GPU</div>
+            <div class="node">sceGu 显示列表 → 屏幕</div>
+          </div>
+        </div>
+        <aside>
+          <div class="no">没有 <s>虚拟 DOM</s></div>
+          <div class="no">没有 <s>diff</s></div>
+          <div class="no">没有 <s>DOM 本身</s></div>
+          <p class="sub">一次状态变更 = 一条精确的写指令。<br/>这就是它塞得进 32 MB 的原因。</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 6 · 关键句 -->
+    <section class="slide">
+      <p class="bigsay">Vapor 不只是让 Vue 变快，<br/>它让<span class="accent">"渲染到哪里"</span><br/>第一次变得便宜。</p>
+    </section>
+
+    <!-- 7 · 薄框架，厚运行时 -->
+    <section class="slide">
+      <p class="kicker">薄框架，厚运行时</p>
+      <h2>浏览器替你做的事，得有人重做一遍</h2>
+      <div class="cards">
+        <div class="card"><b>编译期烘焙</b><p>Tailwind 子集 → 二进制样式表；字体 → 图集；关键帧 → 烘焙时间轴，运行时零计算。</p></div>
+        <div class="card"><b>运行时系统</b><p>输入与焦点、覆盖层、动画引擎、.pak 资产容器、PSP / Vita 原生构建。</p></div>
+      </div>
+      <p class="sub">这些全部与框架无关 —— 换框架只换响应式层和那 244 行绑定，<span class="accent">系统层原封不动</span>。</p>
+    </section>
+
+    <!-- 8 · motions -->
+    <section class="slide">
+      <div class="split">
+        <div class="left">
+          <p class="kicker">案例 · 动效</p>
+          <h2>动画也在编译期</h2>
+          <p class="sub">关键帧在构建期烘焙成二进制时间轴，播放时零 JS 参与 —— 相当于把 CSS 动画的思路推到掌机上。</p>
+        </div>
+        <div class="right">
+          <div class="video-frame" data-missing="assets/videos/motions-psp.mp4">
+            <video src="assets/videos/motions-psp.mp4" muted loop playsinline preload="metadata" data-req></video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 · pocket figma -->
+    <section class="slide">
+      <div class="split">
+        <div class="left">
+          <p class="kicker">案例 · Pocket Figma</p>
+          <h2>整份 Figma 设计稿，搬上掌机</h2>
+          <p class="sub">瓦片化流式渲染 + 调色板纹理。DOM 消失之后，才看清 DOM 替你付过多少钱。</p>
+        </div>
+        <div class="right">
+          <div class="video-frame" data-missing="assets/videos/pocket-figma-psp.mp4">
+            <video src="assets/videos/pocket-figma-psp.mp4" muted loop playsinline preload="metadata" data-req></video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · vita / openstrike -->
+    <section class="slide">
+      <div class="split">
+        <div class="left">
+          <p class="kicker">案例 · 同一份代码，两台真机</p>
+          <h2>两倍像素，零分叉</h2>
+          <p class="sub">同一份应用跑 PSP 和 PS Vita；OpenStrike 用同一套运行时思路在真机锁 60 fps 跑 3D —— 帧预算是硬约束时，细粒度是唯一活法。</p>
+        </div>
+        <div class="right">
+          <div class="video-frame" data-missing="assets/videos/vita-openstrike.mp4">
+            <video src="assets/videos/vita-openstrike.mp4" muted loop playsinline preload="metadata" data-req></video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · pocket youtube -->
+    <section class="slide">
+      <div class="split">
+        <div class="left">
+          <p class="kicker">案例 · Pocket YouTube</p>
+          <h2>在 PSP 上看 YouTube</h2>
+          <p class="sub">Mac 出算力，掌机出画面，USB 当总线。运行时保持小而硬核，能力靠主机协作补齐。</p>
+        </div>
+        <div class="right">
+          <div class="video-frame" data-missing="assets/videos/pocket-youtube-psp.mp4">
+            <video src="assets/videos/pocket-youtube-psp.mp4" muted loop playsinline preload="metadata" data-req></video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · 升华 -->
+    <section class="slide final">
+      <p class="kicker">为什么做这个</p>
+      <p>PocketJS 没有商业理由，只有一个执念：<b>把性能的上限探到底。</b></p>
+      <p>这种执念，<span class="accent">Vue</span> 和 <span class="vite">Vite</span> 早已做成了典范。</p>
+      <p>过去，极致往往败给工程量；今天，AI 第一次让它<b>人人负担得起</b>。</p>
+      <p class="last">去解决那些我们曾经解决不了的问题。</p>
+    </section>
+
+    <!-- 13 · 谢谢 -->
+    <section class="slide">
+      <div class="chev big"></div>
+      <h1>谢谢</h1>
+      <p class="sub" style="font-size:26px; line-height:2">
+        <span class="accent">pocketjs.dev</span> &nbsp;·&nbsp; github.com/pocket-stack<br/>
+        这份 PPT，本身也是 Vue 写的。
+      </p>
+      <div class="chev small"></div>
+    </section>
+
+  </div>
+</div>
+
+<div id="hud">
+  <div id="notes" v-if="showNotes"><span class="t">{{ note.t }}</span>{{ note.n }}</div>
+  <div id="bar" :style="{ width: pct }"></div>
+  <div id="meta">
+    <span>← → 翻页 · F 全屏 · N 备注</span>
+    <span>{{ cur + 1 }} / {{ total }}</span>
+  </div>
+</div>
+
+<script src="vendor/vue.global.prod.js"></script>
+<script>
+  const { createApp, ref, computed, watchEffect } = Vue;
+
+  const notes = [
+    { t: "0:00", n: "不自我介绍。让视频跑 20 秒再开口：『这是 JSX 加细粒度响应式，跑在 2004 年的 PSP 上，333MHz、32MB 内存。』" },
+    { t: "1:00", n: "一句自我介绍 + 报题。『今天讲它为什么可行，以及 Vue Vapor 在其中的角色。』" },
+    { t: "1:30", n: "三张卡各一句话带过，重音落在第三张：Solid 和 Vue Vapor 驱动同一棵原生树。芯片行读一遍数字，制造反差。" },
+    { t: "3:00", n: "停在 import 行：『注意第一行，import 的就是 vue。』观众认出 ref/onMounted 是这页的全部目的，不逐行讲。" },
+    { t: "4:30", n: "全场核心页。左边讲 vdom 自定义渲染器要背整个协调运行时；右边讲 Vapor 编译产物直接调节点操作。落到 244 这个数字，停两秒。" },
+    { t: "6:30", n: "顺着图从上往下走一遍，右侧三个『没有』逐个点。收一句：一次状态变更等于一条精确的写指令。" },
+    { t: "8:00", n: "关键句页，只读一遍，停顿。这是全场唯一希望观众带走的一句话。" },
+    { t: "8:30", n: "『嵌入式 GUI 探索』的正文：浏览器替你做的事，这里用编译期加 Rust 重做。强调换框架系统层原封不动。" },
+    { t: "10:00", n: "动画烘焙：关键帧变二进制时间轴，播放零 JS。看 30 秒视频即可。" },
+    { t: "11:00", n: "Figma 稿瓦片流式渲染。金句：DOM 消失之后，才看清 DOM 替你付过多少钱。（超时先砍这页）" },
+    { t: "12:00", n: "Vita 两倍像素零分叉 + OpenStrike 真机 60fps。一句话：帧预算是硬约束时，细粒度是唯一活法。" },
+    { t: "13:00", n: "Pocket YouTube：Mac 出算力、掌机出画面、USB 当总线。案例收官。" },
+    { t: "14:00", n: "放慢语速。最后一句『去解决那些我们曾经解决不了的问题』之后直接切谢谢页。" },
+    { t: "15:00", n: "『这份 PPT 本身也是 Vue 写的』—— 留给掌声的一页。" },
+  ];
+
+  const cur = ref(0);
+  const showNotes = ref(false);
+  const sections = Array.from(document.querySelectorAll("#stage .slide"));
+  const total = sections.length;
+
+  watchEffect(() => {
+    const i = cur.value;
+    sections.forEach((s, k) => {
+      s.classList.toggle("active", k === i);
+      s.querySelectorAll("video").forEach((v) => {
+        if (k === i) v.play().catch(() => {});
+        else v.pause();
+      });
+    });
+  });
+
+  createApp({
+    setup() {
+      return {
+        cur, total, showNotes,
+        note: computed(() => notes[cur.value] ?? { t: "", n: "" }),
+        pct: computed(() => `${((cur.value + 1) / total) * 100}%`),
+      };
+    },
+  }).mount("#hud");
+
+  const go = (d) => { cur.value = Math.min(total - 1, Math.max(0, cur.value + d)); };
+  window.addEventListener("keydown", (e) => {
+    if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); go(1); }
+    else if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); go(-1); }
+    else if (e.key === "Home") cur.value = 0;
+    else if (e.key === "End") cur.value = total - 1;
+    else if (e.key.toLowerCase() === "f") {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    } else if (e.key.toLowerCase() === "n") showNotes.value = !showNotes.value;
+  });
+
+  const stage = document.getElementById("stage");
+  const fit = () => {
+    stage.style.transform = `scale(${Math.min(innerWidth / 1280, innerHeight / 720)})`;
+  };
+  addEventListener("resize", fit); fit();
+
+  document.querySelectorAll("video[data-req]").forEach((v) => {
+    v.addEventListener("error", () => v.closest(".video-frame")?.classList.add("missing"));
+  });
+</script>
+</body>
+</html>
