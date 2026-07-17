@@ -151,9 +151,9 @@
 /* ---------- logos ---------- */
 .corner-logo { position: absolute; left: 40px; top: 34px; width: 46px; z-index: 10; }
 .logo-pair {
-  position: absolute; right: 92px; top: 50%; transform: translateY(-50%);
-  display: flex; align-items: center; gap: 26px;
+  position: absolute; right: 92px; top: 72px;
+  display: flex; align-items: center; gap: 20px;
 }
-.logo-pair img { width: 140px; }
-.logo-pair span { font-size: 38px; color: var(--dim); font-weight: 600; }
+.logo-pair img { width: 92px; }
+.logo-pair span { font-size: 28px; color: var(--dim); font-weight: 600; }
 .vue-logo-sm { position: absolute; right: 92px; bottom: 60px; width: 56px; }

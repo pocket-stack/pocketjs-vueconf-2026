@@ -149,7 +149,7 @@ title: 实测
 
 <p class="kicker">实测</p>
 
-<h2>每帧 JS 侧开销：Vapor、Vue、Solid</h2>
+<h2>PSP 上每帧 JS 侧开销：Vapor、Vue、Solid</h2>
 
 <div class="bench">
   <div class="bench-row"><span class="bench-name">Vue Vapor</span><span class="bench-track"><span class="bench-bar vapor" style="width:8%"></span><span class="bench-mark"></span></span><span class="bench-val">2.1 ms</span></div>
@@ -157,7 +157,11 @@ title: 实测
   <div class="bench-row"><span class="bench-name">Solid</span><span class="bench-track"><span class="bench-bar solid" style="width:1%"></span><span class="bench-mark"></span></span><span class="bench-val">0.3 ms</span></div>
 </div>
 
-<p class="sub">每帧 JS 回调 + 微任务排水，PSP 模拟器口径（PR #6）；虚线为 16.7 ms 帧预算。</p>
+<p class="sub">
+Vapor 相对 Solid 开销在于每帧的 microtask flush，但已可满足嵌入式无 JIT 设备的实时 UI 需求
+<br>
+React 在 PSP 上甚至无法加载
+</p>
 
 ---
 title: 动效
