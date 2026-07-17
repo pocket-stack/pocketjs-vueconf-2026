@@ -28,7 +28,11 @@ fonts:
 title: 标题页
 ---
 
-<img class="vue-logo" src="/vue.svg" alt="Vue" />
+<div class="logo-pair">
+  <img src="/pocketjs.svg" alt="PocketJS" />
+  <span>×</span>
+  <img src="/vue.svg" alt="Vue" />
+</div>
 
 <p class="kicker">VueConf 2026</p>
 
@@ -42,12 +46,12 @@ title: PocketJS 是什么
 
 <p class="kicker">PocketJS 是什么</p>
 
-<h2>一个为流畅 UI 极致优化的 JS runtime</h2>
+<h2>一个追求 Modern Web DX 最低性能开销的 JS runtime</h2>
 
 <div class="cards">
   <div class="card"><b>Modern Web DX</b><p>JSX + Tailwind 子集。秘诀：屏幕尺寸和应用数据在编译期已知，样式、字体、动画尽量全部提前烘焙好。</p></div>
   <div class="card"><b>完全接管图形绘制</b><p>Rust core 负责布局与渲染，不走 OpenGL，直接裸接平台图形 API 生成显示列表。</p></div>
-  <div class="card"><b>UI 框架层可插拔</b><p>Solid 与 <span class="accent">Vue Vapor</span> 无删减接入，走官方自定义渲染器接口，驱动同一棵原生树。</p></div>
+  <div class="card"><b>UI 框架层可插拔</b><p>Solid 与 <span class="accent">Vue Vapor</span> 无删减接入，走官方自定义渲染器接口，驱动同一棵 Rust UI 节点树。</p></div>
 </div>
 
 <p class="sub">目标机器只有 333 MHz 和 32 MB 内存，但要跑满 60 fps。</p>

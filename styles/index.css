@@ -147,9 +147,11 @@
   background: var(--code-bg); padding: 12px;
 }
 
-/* ---------- vue logo ---------- */
-.vue-logo {
+/* ---------- logos ---------- */
+.logo-pair {
   position: absolute; right: 92px; top: 50%; transform: translateY(-50%);
-  width: 230px; opacity: 0.95;
+  display: flex; align-items: center; gap: 26px;
 }
+.logo-pair img { width: 140px; }
+.logo-pair span { font-size: 38px; color: var(--dim); font-weight: 600; }
 .vue-logo-sm { position: absolute; right: 92px; bottom: 60px; width: 56px; }
