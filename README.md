@@ -25,12 +25,9 @@ open index.html               # file:// 直接放映，无需服务器
 | `pocket-figma-psp.mp4` | Pocket Figma，PSP 真机 | R2 |
 | `vita-openstrike.mp4` | 全量 demo + OpenStrike，PS Vita 真机 | R2 |
 | `pocket-youtube-psp.mp4` | Pocket YouTube，PSP 真机 | R2 |
-| `motions-psp.mp4` | motions 动效画廊 | **需自录**，缺失时该页显示占位提示 |
+| `../motions.gif` | motions 动效画廊（gif，已随仓库提交） | pocketjs 仓库 assets/screenshots/motions-53.gif |
 
-两个可选升级：
-
-- **开场视频**：现有 hero 素材是 Solid 构建。用 `bun scripts/psp.ts hero-vue-vapor --framework=vue-vapor --release` 重录一版，"跑的就是 Vue"这句话就字面为真。
-- **motions**：真机录一段 motions 画廊（demos/motions），替换占位。
+可选升级：开场 hero 素材是 Solid 构建，用 `bun scripts/psp.ts hero-vue-vapor --framework=vue-vapor --release` 重录一版，"跑的就是 Vue"这句话就字面为真。
 
 ## 结构（13 页 · 目标 15 分钟）
 

@@ -24,5 +24,3 @@ for (const [name, url] of Object.entries(ASSETS)) {
   await Bun.write(dest, res);
   console.log(`  ok  ${(Bun.file(dest).size / 1e6).toFixed(1)} MB`);
 }
-
-console.log("\n提示：motions-psp.mp4 需自录（真机 motions 画廊录屏），放入 assets/videos/ 后 deck 自动播放。");

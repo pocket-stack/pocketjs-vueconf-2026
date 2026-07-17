@@ -79,7 +79,7 @@
     border: 1px solid var(--panel-line); background: #000;
     box-shadow: 0 24px 70px rgba(0,0,0,.5);
   }
-  .video-frame video { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .video-frame video, .video-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .video-frame.missing::after {
     content: "素材待录制 → " attr(data-missing);
     position: absolute; inset: 0; display: grid; place-items: center;
@@ -185,7 +185,7 @@
       <div class="chev big"></div>
       <p class="kicker">VueConf 2026</p>
       <h1>PocketJS 与 <span class="accent">Vue Vapor</span> 的<br/>嵌入式 GUI 探索</h1>
-      <p class="sub">Yifeng "Evan" Wang<br/>pocketjs.dev</p>
+      <p class="sub">雪碧<br/>GitHub @doodlewind&emsp;X @ewind_dev</p>
       <div class="chev small"></div>
     </section>
 
@@ -300,8 +300,8 @@
           <p class="sub">关键帧在构建期烘焙成二进制时间轴，播放时零 JS 参与 —— 相当于把 CSS 动画的思路推到掌机上。</p>
         </div>
         <div class="right">
-          <div class="video-frame" data-missing="assets/videos/motions-psp.mp4">
-            <video src="assets/videos/motions-psp.mp4" muted loop playsinline preload="metadata" data-req></video>
+          <div class="video-frame">
+            <img src="assets/motions.gif" alt="motions 动效画廊" />
           </div>
         </div>
       </div>
@@ -313,7 +313,7 @@
         <div class="left">
           <p class="kicker">Pocket Figma</p>
           <h2>整份 Figma 设计稿，搬上掌机</h2>
-          <p class="sub">瓦片化流式渲染 + 调色板纹理。DOM 消失之后，才看清 DOM 替你付过多少钱。</p>
+          <p class="sub">设计稿在构建期烘焙成瓦片集，运行时按视口流式加载，CLUT8 调色板纹理控制显存占用。</p>
         </div>
         <div class="right">
           <div class="video-frame" data-missing="assets/videos/pocket-figma-psp.mp4">
@@ -329,7 +329,7 @@
         <div class="left">
           <p class="kicker">同一份代码，两台真机</p>
           <h2>两倍像素，零分叉</h2>
-          <p class="sub">同一份应用跑 PSP 和 PS Vita；OpenStrike 用同一套运行时思路在真机锁 60 fps 跑 3D —— 帧预算是硬约束时，细粒度是唯一活法。</p>
+          <p class="sub">跨平台靠 capability 机制：应用声明需要的能力，平台声明提供的能力，匹配即可运行。同一份代码不改跑在 PSP 和 PS Vita 上，OpenStrike 真机 60 fps。</p>
         </div>
         <div class="right">
           <div class="video-frame" data-missing="assets/videos/vita-openstrike.mp4">
@@ -345,7 +345,7 @@
         <div class="left">
           <p class="kicker">Pocket YouTube</p>
           <h2>在 PSP 上看 YouTube</h2>
-          <p class="sub">Mac 出算力，掌机出画面，USB 当总线。运行时保持小而硬核，能力靠主机协作补齐。</p>
+          <p class="sub">macOS 作为 host 负责视频加载与解码，像素流经 USB 传给 PSP 渲染。</p>
         </div>
         <div class="right">
           <div class="video-frame" data-missing="assets/videos/pocket-youtube-psp.mp4">
@@ -361,8 +361,7 @@
       <h1>谢谢</h1>
       <p class="sub" style="font-size:26px; line-height:2">
         <span class="accent">pocketjs.dev</span><br/>
-        github.com/pocket-stack<br/>
-        这份 PPT，本身也是 Vue 写的。
+        github.com/pocket-stack
       </p>
       <div class="chev small"></div>
     </section>
