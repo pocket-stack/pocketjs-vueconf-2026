@@ -42,12 +42,12 @@ title: PocketJS 是什么
 
 <p class="kicker">PocketJS 是什么</p>
 
-<h2>一个跑在游戏掌机上的 UI 框架</h2>
+<h2>一个为流畅 UI 极致优化的 JS runtime</h2>
 
 <div class="cards">
-  <div class="card"><b>写法是前端的</b><p>JSX + Tailwind 子集，样式、字体、动画全部在编译期烘焙成二进制。</p></div>
-  <div class="card"><b>运行时是系统级的</b><p>Rust core 负责布局与渲染，直接生成 GPU 显示列表。</p></div>
-  <div class="card"><b>框架层可插拔</b><p>Solid 与 <span class="accent">Vue Vapor</span> 是两个一等公民，驱动同一棵原生树。</p></div>
+  <div class="card"><b>Modern Web DX</b><p>JSX + Tailwind 子集。秘诀：屏幕尺寸和应用数据在编译期已知，样式、字体、动画尽量全部提前烘焙好。</p></div>
+  <div class="card"><b>完全接管图形绘制</b><p>Rust core 负责布局与渲染，不走 OpenGL，直接裸接平台图形 API 生成显示列表。</p></div>
+  <div class="card"><b>UI 框架层可插拔</b><p>Solid 与 <span class="accent">Vue Vapor</span> 无删减接入，走官方自定义渲染器接口，驱动同一棵原生树。</p></div>
 </div>
 
 <p class="sub">目标机器只有 333 MHz 和 32 MB 内存，但要跑满 60 fps。</p>
@@ -58,7 +58,7 @@ title: 掌机上的 Vue 应用
 
 <p class="kicker">掌机上的 Vue 应用</p>
 
-```tsx {1}
+```tsx
 import { onMounted, ref } from "vue";
 import { mount } from "@pocketjs/framework/vue-vapor";
 import { View, Text } from "@pocketjs/framework/vue-vapor/components";
@@ -108,7 +108,7 @@ title: 为什么是 Vapor
   </div>
 </div>
 
-<p class="stat-line">把 Vue 接上 PSP 的渲染绑定：<b>244 行</b>&nbsp;&nbsp;<span class="sub-inline">（渲染器 108 + DOM 门面 136；整个 Vue 适配层 &lt; 1200 行）</span></p>
+<p class="stat-line">每帧只有 <b>1 次</b> JS → Rust 的 FFI 机会——写操作在 JS 侧合并成一条指令流，每帧跨一次边界交给 Rust；跨界多了就掉帧。</p>
 
 ---
 title: count.value++ 的旅程
@@ -139,16 +139,6 @@ title: count.value++ 的旅程
     <p class="sub">一次状态变更 = 一条精确的写指令。<br/>这就是它塞得进 32 MB 的原因。</p>
   </aside>
 </div>
-
----
-title: 帧预算
----
-
-<p class="kicker">帧预算</p>
-
-<p class="bigsay">每帧只有一次<br/>JS → Rust 的 <span class="accent">FFI 机会</span>。</p>
-
-<p class="sub">effect 的写操作先落在 JS 侧的节点镜像上，每帧合并成一条指令流，跨一次边界交给 Rust。跨界次数一多就掉帧——细粒度更新的意义就是让这条指令流足够短。</p>
 
 ---
 title: 实测

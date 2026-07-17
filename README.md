@@ -31,7 +31,7 @@ bun run dev                   # 启动并自动打开浏览器
 
 可选升级：开场 hero 素材是 Solid 构建，用 `bun scripts/psp.ts hero-vue-vapor --framework=vue-vapor --release` 重录一版，"跑的就是 Vue"这句话就字面为真。
 
-## 结构（14 页 · 目标 15 分钟）
+## 结构（13 页 · 目标 15 分钟）
 
 | # | 页 | 时间点 |
 |---|---|---|
@@ -39,17 +39,16 @@ bun run dev                   # 启动并自动打开浏览器
 | 2 | 标题 | 1:00 |
 | 3 | PocketJS 是什么 | 1:30 |
 | 4 | 掌机上的 Vue 应用（代码） | 3:00 |
-| 5 | 为什么是 Vapor | 4:30 |
-| 6 | 一次 count.value++ 的旅程 | 6:00 |
-| 7 | 帧预算：每帧一次 FFI | 7:00 |
-| 8 | 实测：Vapor vs Vue vs Solid | 8:00 |
-| 9 | 动效 | 9:30 |
-| 10 | Pocket Figma | 10:30 |
-| 11 | PSP 和 PS Vita（capability） | 11:30 |
-| 12 | Pocket YouTube | 12:30 |
-| 13 | 虚拟时钟与输入磁带 | 13:30 |
-| 14 | 掌机之外 | 14:30 |
+| 5 | 为什么是 Vapor（每帧一次 FFI） | 4:30 |
+| 6 | 一次 count.value++ 的旅程 | 6:30 |
+| 7 | 实测：Vapor vs Vue vs Solid | 8:00 |
+| 8 | 动效 | 9:30 |
+| 9 | Pocket Figma | 10:30 |
+| 10 | PSP 和 PS Vita（capability） | 11:30 |
+| 11 | Pocket YouTube | 12:30 |
+| 12 | 虚拟时钟与输入磁带 | 13:30 |
+| 13 | 掌机之外 | 14:30 |
 
-超时先砍第 10 页（Pocket Figma），再压缩第 9 页（动效）。
+超时先砍第 9 页（Pocket Figma），再压缩第 8 页（动效）。
 
 实测数据来自 pocketjs PR #6（2026-07-04 修正 feature parity 后的 PPSSPP 基准）。
