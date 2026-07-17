@@ -82,7 +82,7 @@ export default function App() {
 mount(App);
 ```
 
-<p class="sub">不是"像 Vue" <br/><span class="accent">import 的就是 vue</span>：真的 ref，真的 onMounted，真的 Vapor 编译。</p>
+<p class="sub">UI 的第一性原理：只需要 View Text Image 加上 Reactivity</p>
 
 ---
 title: 为什么是 Vapor
@@ -111,7 +111,7 @@ title: 为什么是 Vapor
   </div>
 </div>
 
-<p class="stat-line">每帧只有 <b>1 次</b> JS → Rust 的 FFI 机会——写操作在 JS 侧合并成一条指令流，每帧跨一次边界交给 Rust；跨界多了就掉帧。</p>
+<p class="stat-line">每帧只有 1 次 JS → Rust 的 FFI 机会</p>
 
 ---
 title: count.value++ 的旅程
@@ -139,7 +139,7 @@ title: count.value++ 的旅程
     <div class="no">没有 <s>虚拟 DOM</s></div>
     <div class="no">没有 <s>diff</s></div>
     <div class="no">没有 <s>DOM 本身</s></div>
-    <p class="sub">一次状态变更 = 一条精确的写指令。<br/>这就是它塞得进 32 MB 的原因。</p>
+    <p class="sub">一次状态变更 = 一条精确的写指令。</p>
   </aside>
 </div>
 
@@ -149,15 +149,15 @@ title: 实测
 
 <p class="kicker">实测</p>
 
-<h2>每帧总工作量：Vapor、Vue、Solid</h2>
+<h2>每帧 JS 侧开销：Vapor、Vue、Solid</h2>
 
 <div class="bench">
-  <div class="bench-row"><span class="bench-name">Vue Vapor</span><span class="bench-track"><span class="bench-bar vapor" style="width:39%"></span></span><span class="bench-val">23.4 ms</span></div>
-  <div class="bench-row"><span class="bench-name">Vue</span><span class="bench-track"><span class="bench-bar vue" style="width:100%"></span></span><span class="bench-val">59.6 ms</span></div>
-  <div class="bench-row"><span class="bench-name">Solid</span><span class="bench-track"><span class="bench-bar solid" style="width:27%"></span></span><span class="bench-val">16.0 ms</span></div>
+  <div class="bench-row"><span class="bench-name">Vue Vapor</span><span class="bench-track"><span class="bench-bar vapor" style="width:8%"></span><span class="bench-mark"></span></span><span class="bench-val">2.1 ms</span></div>
+  <div class="bench-row"><span class="bench-name">Vue</span><span class="bench-track"><span class="bench-bar vue" style="width:100%"></span><span class="bench-mark"></span></span><span class="bench-val">26.9 ms</span></div>
+  <div class="bench-row"><span class="bench-name">Solid</span><span class="bench-track"><span class="bench-bar solid" style="width:1%"></span><span class="bench-mark"></span></span><span class="bench-val">0.3 ms</span></div>
 </div>
 
-<p class="sub">7 个 demo 的几何均值，PPSSPP 口径，feature parity 修正后（pocketjs PR #6）。Vapor 的帧内工作量是 Vue 的 0.39 倍；代价同样如实：启动 eval 是 Solid 的 3.5 倍，bundle 3.7 倍。</p>
+<p class="sub">每帧 JS 回调 + 微任务排水，PSP 模拟器口径（PR #6）；虚线为 16.7 ms 帧预算。</p>
 
 ---
 title: 动效
