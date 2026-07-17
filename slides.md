@@ -12,7 +12,6 @@ drawings:
   persist: false
 fonts:
   provider: none
-class: bleed
 ---
 
 <div class="bleed-video">
@@ -26,6 +25,8 @@ class: bleed
 </div>
 
 ---
+title: 标题页
+---
 
 <img class="vue-logo" src="/vue.svg" alt="Vue" />
 
@@ -35,6 +36,8 @@ class: bleed
 
 <p class="sub">雪碧 from PaperboyAI<br/>GitHub @doodlewind<br/>X@ewind_dev</p>
 
+---
+title: PocketJS 是什么
 ---
 
 <p class="kicker">PocketJS 是什么</p>
@@ -49,6 +52,8 @@ class: bleed
 
 <p class="sub">目标机器只有 333 MHz 和 32 MB 内存，但要跑满 60 fps。</p>
 
+---
+title: 掌机上的 Vue 应用
 ---
 
 <p class="kicker">掌机上的 Vue 应用</p>
@@ -77,6 +82,8 @@ mount(App);
 <p class="sub">不是"像 Vue"—— <span class="accent">import 的就是 vue</span>：真的 ref，真的 onMounted，真的 Vapor 编译。</p>
 
 ---
+title: 为什么是 Vapor
+---
 
 <p class="kicker">为什么是 Vapor</p>
 
@@ -103,6 +110,8 @@ mount(App);
 
 <p class="stat-line">把 Vue 接上 PSP 的渲染绑定：<b>244 行</b>&nbsp;&nbsp;<span class="sub-inline">（渲染器 108 + DOM 门面 136；整个 Vue 适配层 &lt; 1200 行）</span></p>
 
+---
+title: count.value++ 的旅程
 ---
 
 <p class="kicker">一次 count.value++ 的旅程</p>
@@ -132,6 +141,8 @@ mount(App);
 </div>
 
 ---
+title: 帧预算
+---
 
 <p class="kicker">帧预算</p>
 
@@ -139,6 +150,8 @@ mount(App);
 
 <p class="sub">effect 的写操作先落在 JS 侧的节点镜像上，每帧合并成一条指令流，跨一次边界交给 Rust。跨界次数一多就掉帧——细粒度更新的意义就是让这条指令流足够短。</p>
 
+---
+title: 实测
 ---
 
 <p class="kicker">实测</p>
@@ -154,6 +167,8 @@ mount(App);
 <p class="sub">7 个 demo 的几何均值，PPSSPP 口径，feature parity 修正后（pocketjs PR #6）。Vapor 的帧内工作量是 Vue 的 0.39 倍；代价同样如实：启动 eval 是 Solid 的 3.5 倍，bundle 3.7 倍。</p>
 
 ---
+title: 动效
+---
 
 <div class="split">
   <div class="left">
@@ -168,6 +183,8 @@ mount(App);
   </div>
 </div>
 
+---
+title: Pocket Figma
 ---
 
 <div class="split">
@@ -186,6 +203,8 @@ mount(App);
 </div>
 
 ---
+title: PSP 和 PS Vita
+---
 
 <div class="split">
   <div class="left">
@@ -202,6 +221,8 @@ mount(App);
   </div>
 </div>
 
+---
+title: Pocket YouTube
 ---
 
 <div class="split">
@@ -220,6 +241,8 @@ mount(App);
 </div>
 
 ---
+title: 虚拟时钟与输入磁带
+---
 
 <p class="kicker">同一个运行时的另一面</p>
 
@@ -232,6 +255,8 @@ mount(App);
 
 <p class="sub">每帧一次事务：state[n+1] = F(state[n], input[n])，能改变世界的输入全部记在磁带上。同一个 UI 断言各跑 60 次：墙钟 22 种结果、通过 9 次；虚拟时钟 1 种结果、60/60。</p>
 
+---
+title: 掌机之外
 ---
 
 <img class="vue-logo-sm" src="/vue.svg" alt="Vue" />
