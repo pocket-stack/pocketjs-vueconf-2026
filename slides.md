@@ -249,6 +249,8 @@ title: 虚拟时钟与输入磁带
 
 <p class="sub">每帧一次事务：state[n+1] = F(state[n], input[n])，能改变世界的输入全部记在磁带上。同一个 UI 断言各跑 60 次：墙钟 22 种结果、通过 9 次；虚拟时钟 1 种结果、60/60。</p>
 
+<p class="sub">PocketJS 类似游戏引擎，强制每帧仅跑一次 JS 回调——<span class="accent">What if agent 不需要 60fps UI，只需要 2fps 呢？</span></p>
+
 ---
 title: 掌机之外
 ---
