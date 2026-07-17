@@ -142,6 +142,22 @@
   .bigsay { font-size: 52px; font-weight: 800; line-height: 1.4; margin: 0; }
   .bigsay .accent { display: inline; }
 
+  .bench { display: flex; flex-direction: column; gap: 18px; margin: 10px 0; }
+  .bench-row { display: flex; align-items: center; gap: 20px; }
+  .bench-name { width: 150px; font-size: 20px; font-family: "SF Mono", Menlo, monospace; color: var(--text); }
+  .bench-track { flex: 1; background: rgba(147,165,184,.12); border-radius: 7px; height: 30px; overflow: hidden; }
+  .bench-bar { display: block; height: 100%; border-radius: 7px; }
+  .bench-bar.vapor { background: #3f7df6; }
+  .bench-bar.vue { background: var(--green); }
+  .bench-bar.solid { background: #cbd5e1; }
+  .bench-val { width: 110px; text-align: right; font-size: 19px; font-family: "SF Mono", Menlo, monospace; color: var(--dim); }
+
+  .diagrams { display: flex; gap: 20px; align-items: stretch; }
+  .diagrams .diagram {
+    flex: 1; min-width: 0; border: 1px solid var(--panel-line); border-radius: 14px;
+    background: var(--code-bg); padding: 12px;
+  }
+
   /* Vue-ish chevron motif */
   .chev { position: absolute; pointer-events: none; }
   .chev.big {
@@ -275,20 +291,23 @@
       </div>
     </section>
 
-    <!-- 6 · 关键句 -->
+    <!-- 6 · FFI 预算 -->
     <section class="slide">
-      <p class="bigsay">Vapor 不只是让 Vue 变快，<br/>它让<span class="accent">"渲染到哪里"</span><br/>第一次变得便宜。</p>
+      <p class="kicker">帧预算</p>
+      <p class="bigsay">每帧只有一次<br/>JS → Rust 的 <span class="accent">FFI 机会</span>。</p>
+      <p class="sub">effect 的写操作先落在 JS 侧的节点镜像上，每帧合并成一条指令流，跨一次边界交给 Rust。跨界次数一多就掉帧——细粒度更新的意义就是让这条指令流足够短。</p>
     </section>
 
-    <!-- 7 · 薄框架，厚运行时 -->
+    <!-- 7 · 实测 -->
     <section class="slide">
-      <p class="kicker">薄框架，厚运行时</p>
-      <h2>浏览器替你做的事，得有人重做一遍</h2>
-      <div class="cards">
-        <div class="card"><b>编译期烘焙</b><p>Tailwind 子集 → 二进制样式表；字体 → 图集；关键帧 → 烘焙时间轴，运行时零计算。</p></div>
-        <div class="card"><b>运行时系统</b><p>输入与焦点、覆盖层、动画引擎、.pak 资产容器、PSP / Vita 原生构建。</p></div>
+      <p class="kicker">实测</p>
+      <h2>每帧总工作量：Vapor、Vue、Solid</h2>
+      <div class="bench">
+        <div class="bench-row"><span class="bench-name">Vue Vapor</span><span class="bench-track"><span class="bench-bar vapor" style="width:39%"></span></span><span class="bench-val">23.4 ms</span></div>
+        <div class="bench-row"><span class="bench-name">Vue</span><span class="bench-track"><span class="bench-bar vue" style="width:100%"></span></span><span class="bench-val">59.6 ms</span></div>
+        <div class="bench-row"><span class="bench-name">Solid</span><span class="bench-track"><span class="bench-bar solid" style="width:27%"></span></span><span class="bench-val">16.0 ms</span></div>
       </div>
-      <p class="sub">这些全部与框架无关 —— 换框架只换响应式层和那 244 行绑定，<span class="accent">系统层原封不动</span>。</p>
+      <p class="sub">7 个 demo 的几何均值，PPSSPP 口径，feature parity 修正后（pocketjs PR #6）。Vapor 的帧内工作量是 Vue 的 0.39 倍；代价同样如实：启动 eval 是 Solid 的 3.5 倍，bundle 3.7 倍。</p>
     </section>
 
     <!-- 8 · motions -->
@@ -327,9 +346,9 @@
     <section class="slide">
       <div class="split">
         <div class="left">
-          <p class="kicker">同一份代码，两台真机</p>
-          <h2>两倍像素，零分叉</h2>
-          <p class="sub">跨平台靠 capability 机制：应用声明需要的能力，平台声明提供的能力，匹配即可运行。同一份代码不改跑在 PSP 和 PS Vita 上，OpenStrike 真机 60 fps。</p>
+          <p class="kicker">PSP 和 PS Vita</p>
+          <h2>一份代码跑两台机器</h2>
+          <p class="sub">应用在 pocket.json 里声明依赖的 capability，宿主装载时对照自己实现的列表校验。两台机器分辨率和输入不同，差异由各自的宿主消化，应用代码不改。</p>
         </div>
         <div class="right">
           <div class="video-frame" data-missing="assets/videos/vita-openstrike.mp4">
@@ -355,14 +374,28 @@
       </div>
     </section>
 
-    <!-- 12 · 谢谢 -->
+    <!-- 12 · 确定性 -->
+    <section class="slide">
+      <p class="kicker">同一个运行时的另一面</p>
+      <h2>虚拟时钟与输入磁带</h2>
+      <div class="diagrams">
+        <img class="diagram" src="assets/flake-time-models.svg" alt="sampled-time 与 frame-fold 两种运行时模型" />
+        <img class="diagram" src="assets/flake-histogram.svg" alt="墙钟与虚拟时钟各 60 次运行的直方图对比" />
+      </div>
+      <p class="sub">每帧一次事务：state[n+1] = F(state[n], input[n])，能改变世界的输入全部记在磁带上。同一个 UI 断言各跑 60 次：墙钟 22 种结果、通过 9 次；虚拟时钟 1 种结果、60/60。</p>
+    </section>
+
+    <!-- 13 · 掌机之外 -->
     <section class="slide">
       <div class="chev big"></div>
-      <h1>谢谢</h1>
-      <p class="sub" style="font-size:26px; line-height:2">
-        <span class="accent">pocketjs.dev</span><br/>
-        github.com/pocket-stack
-      </p>
+      <p class="kicker">掌机之外</p>
+      <h2>这个运行时还能用在哪</h2>
+      <div class="cards">
+        <div class="card"><b>桌面嵌入 UI</b><p>同一个运行时已有 wgpu 桌面后端，可以作为 UI 层嵌进原生应用。</p></div>
+        <div class="card"><b>离屏视频渲染</b><p>帧序列是确定的，可以逐帧离屏渲染，直接当视频合成器用。</p></div>
+        <div class="card"><b>确定性测试</b><p>虚拟时钟加输入磁带，UI 测试跑在模拟世界里，重放逐字节一致。</p></div>
+      </div>
+      <p class="sub"><span class="accent">pocketjs.dev</span><br/>github.com/pocket-stack</p>
       <div class="chev small"></div>
     </section>
 
