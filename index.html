@@ -62,13 +62,6 @@
   .card b { display: block; font-size: 21px; margin-bottom: 10px; color: var(--text); }
   .card p { margin: 0; color: var(--dim); font-size: 17.5px; line-height: 1.65; }
 
-  .chips { display: flex; gap: 12px; }
-  .chip {
-    border: 1px solid var(--panel-line); border-radius: 999px;
-    padding: 7px 18px; font-size: 16px; color: var(--green-soft);
-    font-family: "SF Mono", Menlo, monospace; background: rgba(66,184,131,.08);
-  }
-
   /* ---------- code ---------- */
   pre.code {
     margin: 0; background: var(--code-bg); border: 1px solid var(--panel-line);
@@ -193,17 +186,17 @@
         <video src="assets/videos/hero-psp.mp4" muted loop playsinline preload="auto" data-req></video>
       </div>
       <div class="caption">
-        <b>JSX + 细粒度响应式 —— 跑在 2004 年的 PSP 上</b>
-        <span>真机实拍 · 无剪辑 · 60 fps</span>
+        <b>JSX + 细粒度响应式，跑在 2004 年的 PSP 上</b>
+        <span>真机实拍</span>
       </div>
     </section>
 
     <!-- 1 · 标题 -->
     <section class="slide">
       <div class="chev big"></div>
-      <p class="kicker">VueConf 2026 · 闪电分享</p>
+      <p class="kicker">VueConf 2026</p>
       <h1>PocketJS 与 <span class="accent">Vue Vapor</span> 的<br/>嵌入式 GUI 探索</h1>
-      <p class="sub">Yifeng "Evan" Wang &nbsp;·&nbsp; pocketjs.dev</p>
+      <p class="sub">Yifeng "Evan" Wang<br/>pocketjs.dev</p>
       <div class="chev small"></div>
     </section>
 
@@ -216,10 +209,7 @@
         <div class="card"><b>运行时是系统级的</b><p>Rust core 负责布局与渲染，直接生成 GPU 显示列表。</p></div>
         <div class="card"><b>框架层可插拔</b><p>Solid 与 <span class="accent">Vue Vapor</span> 是两个一等公民，驱动同一棵原生树。</p></div>
       </div>
-      <div class="chips">
-        <span class="chip">MIPS 333 MHz</span><span class="chip">32 MB RAM</span>
-        <span class="chip">480 × 272</span><span class="chip">锁 60 fps</span>
-      </div>
+      <p class="sub">目标机器只有 333 MHz 和 32 MB 内存，但要跑满 60 fps。</p>
     </section>
 
     <!-- 3 · 代码：就是 Vue -->
@@ -316,7 +306,7 @@
     <section class="slide">
       <div class="split">
         <div class="left">
-          <p class="kicker">案例 · 动效</p>
+          <p class="kicker">动效</p>
           <h2>动画也在编译期</h2>
           <p class="sub">关键帧在构建期烘焙成二进制时间轴，播放时零 JS 参与 —— 相当于把 CSS 动画的思路推到掌机上。</p>
         </div>
@@ -332,7 +322,7 @@
     <section class="slide">
       <div class="split">
         <div class="left">
-          <p class="kicker">案例 · Pocket Figma</p>
+          <p class="kicker">Pocket Figma</p>
           <h2>整份 Figma 设计稿，搬上掌机</h2>
           <p class="sub">瓦片化流式渲染 + 调色板纹理。DOM 消失之后，才看清 DOM 替你付过多少钱。</p>
         </div>
@@ -348,7 +338,7 @@
     <section class="slide">
       <div class="split">
         <div class="left">
-          <p class="kicker">案例 · 同一份代码，两台真机</p>
+          <p class="kicker">同一份代码，两台真机</p>
           <h2>两倍像素，零分叉</h2>
           <p class="sub">同一份应用跑 PSP 和 PS Vita；OpenStrike 用同一套运行时思路在真机锁 60 fps 跑 3D —— 帧预算是硬约束时，细粒度是唯一活法。</p>
         </div>
@@ -364,7 +354,7 @@
     <section class="slide">
       <div class="split">
         <div class="left">
-          <p class="kicker">案例 · Pocket YouTube</p>
+          <p class="kicker">Pocket YouTube</p>
           <h2>在 PSP 上看 YouTube</h2>
           <p class="sub">Mac 出算力，掌机出画面，USB 当总线。运行时保持小而硬核，能力靠主机协作补齐。</p>
         </div>
@@ -379,10 +369,10 @@
     <!-- 12 · 升华 -->
     <section class="slide final">
       <p class="kicker">为什么做这个</p>
-      <p>PocketJS 没有商业理由，只有一个执念：<b>把性能的上限探到底。</b></p>
-      <p>这种执念，<span class="accent">Vue</span> 和 <span class="vite">Vite</span> 早已做成了典范。</p>
-      <p>过去，极致往往败给工程量；今天，AI 第一次让它<b>人人负担得起</b>。</p>
-      <p class="last">去解决那些我们曾经解决不了的问题。</p>
+      <p>做 PocketJS，只是想把性能的上限探清楚。</p>
+      <p>这种较真，<span class="accent">Vue</span> 和 <span class="vite">Vite</span> 是榜样。</p>
+      <p>变化在于：现在有 AI，这类事一个人也做得完。</p>
+      <p class="last">以前做不成的事，值得再试一次。</p>
     </section>
 
     <!-- 13 · 谢谢 -->
@@ -390,7 +380,8 @@
       <div class="chev big"></div>
       <h1>谢谢</h1>
       <p class="sub" style="font-size:26px; line-height:2">
-        <span class="accent">pocketjs.dev</span> &nbsp;·&nbsp; github.com/pocket-stack<br/>
+        <span class="accent">pocketjs.dev</span><br/>
+        github.com/pocket-stack<br/>
         这份 PPT，本身也是 Vue 写的。
       </p>
       <div class="chev small"></div>
@@ -403,7 +394,7 @@
   <div id="notes" v-if="showNotes"><span class="t">{{ note.t }}</span>{{ note.n }}</div>
   <div id="bar" :style="{ width: pct }"></div>
   <div id="meta">
-    <span>← → 翻页 · F 全屏 · N 备注</span>
+    <span>← → 翻页&emsp;F 全屏&emsp;N 备注</span>
     <span>{{ cur + 1 }} / {{ total }}</span>
   </div>
 </div>
@@ -425,7 +416,7 @@
     { t: "11:00", n: "Figma 稿瓦片流式渲染。金句：DOM 消失之后，才看清 DOM 替你付过多少钱。（超时先砍这页）" },
     { t: "12:00", n: "Vita 两倍像素零分叉 + OpenStrike 真机 60fps。一句话：帧预算是硬约束时，细粒度是唯一活法。" },
     { t: "13:00", n: "Pocket YouTube：Mac 出算力、掌机出画面、USB 当总线。案例收官。" },
-    { t: "14:00", n: "放慢语速。最后一句『去解决那些我们曾经解决不了的问题』之后直接切谢谢页。" },
+    { t: "14:00", n: "放慢语速，平常心念完。收在『以前做不成的事，值得再试一次』，停一拍再切谢谢页。" },
     { t: "15:00", n: "『这份 PPT 本身也是 Vue 写的』—— 留给掌声的一页。" },
   ];
 
@@ -473,7 +464,11 @@
   addEventListener("resize", fit); fit();
 
   document.querySelectorAll("video[data-req]").forEach((v) => {
-    v.addEventListener("error", () => v.closest(".video-frame")?.classList.add("missing"));
+    const mark = () => v.closest(".video-frame")?.classList.add("missing");
+    v.addEventListener("error", mark);
+    const check = () => { if (v.error || v.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) mark(); };
+    check();
+    setTimeout(check, 1200);
   });
 </script>
 </body>
