@@ -1,0 +1,155 @@
+:root {
+  --green: #42b883;
+  --green-soft: #6fd3a6;
+  --slate: #35495e;
+  --bg: #0b111d;
+  --panel: rgba(53, 73, 94, 0.28);
+  --panel-line: rgba(66, 184, 131, 0.22);
+  --text: #e9f0f8;
+  --dim: #93a5b8;
+  --code-bg: #0e1626;
+}
+
+/* ---------- slide base ---------- */
+.slidev-layout {
+  background:
+    radial-gradient(1200px 800px at 78% -10%, rgba(66, 184, 131, 0.10), transparent 60%),
+    radial-gradient(900px 700px at -10% 110%, rgba(53, 73, 94, 0.55), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  padding: 68px 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 26px;
+}
+
+.slidev-layout.bleed { padding: 0; justify-content: flex-end; }
+
+.slidev-layout h1 {
+  font-size: 56px; line-height: 1.22; margin: 0; font-weight: 800;
+  letter-spacing: 0.01em; color: var(--text);
+}
+.slidev-layout h2 {
+  font-size: 42px; line-height: 1.25; margin: 0; font-weight: 800; color: var(--text);
+}
+.slidev-layout p { margin: 0; }
+
+.kicker {
+  color: var(--green); font-size: 17px; font-weight: 700;
+  letter-spacing: 0.28em; text-transform: uppercase;
+}
+.sub { color: var(--dim); font-size: 22px; line-height: 1.7; }
+.sub-inline { color: var(--dim); font-size: 22px; }
+.accent { color: var(--green); }
+
+/* ---------- cards ---------- */
+.cards { display: flex; gap: 20px; }
+.card {
+  flex: 1; background: var(--panel); border: 1px solid var(--panel-line);
+  border-radius: 16px; padding: 24px 26px;
+}
+.card b { display: block; font-size: 21px; margin-bottom: 10px; color: var(--text); }
+.card p { color: var(--dim); font-size: 17.5px; line-height: 1.65; }
+
+/* ---------- code ---------- */
+.slidev-layout pre.shiki {
+  margin: 0; background: var(--code-bg) !important; border: 1px solid var(--panel-line);
+  border-radius: 16px; padding: 24px 28px;
+  font-size: 17.5px; line-height: 1.6;
+}
+
+/* ---------- video / media ---------- */
+.video-frame {
+  position: relative; border-radius: 18px; overflow: hidden;
+  border: 1px solid var(--panel-line); background: #000;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+.video-frame.ratio { aspect-ratio: 16 / 9; }
+.video-frame video, .video-frame img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+}
+
+.bleed-video { position: absolute; inset: 0; }
+.bleed-video video { width: 100%; height: 100%; object-fit: cover; }
+
+.caption {
+  position: relative; z-index: 2; margin: 0 64px 56px;
+  background: rgba(11, 17, 29, 0.72); backdrop-filter: blur(10px);
+  border: 1px solid var(--panel-line); border-radius: 14px; padding: 18px 26px;
+  width: fit-content; max-width: 900px;
+}
+.caption b { font-size: 24px; display: block; color: var(--text); }
+.caption span { color: var(--dim); font-size: 16px; }
+
+.split { display: flex; gap: 36px; align-items: stretch; min-height: 0; }
+.split > .left { flex: 1.05; display: flex; flex-direction: column; gap: 22px; justify-content: center; }
+.split > .right { flex: 1.4; display: flex; flex-direction: column; justify-content: center; }
+
+/* ---------- compare lanes ---------- */
+.compare { display: flex; gap: 24px; }
+.lane {
+  flex: 1; border-radius: 16px; padding: 22px 24px;
+  border: 1px solid rgba(147, 165, 184, 0.25); background: rgba(147, 165, 184, 0.06);
+}
+.lane.win { border-color: var(--panel-line); background: rgba(66, 184, 131, 0.07); }
+.lane h3 { margin: 0 0 16px; font-size: 20px; color: var(--dim); font-weight: 700; }
+.lane.win h3 { color: var(--green); }
+.node {
+  border: 1px solid rgba(147, 165, 184, 0.3); background: rgba(11, 17, 29, 0.6);
+  border-radius: 10px; padding: 10px 16px; font-size: 17px; text-align: center;
+  font-family: "SF Mono", Menlo, monospace; color: #c9d6e6;
+}
+.node.heavy { border-style: dashed; color: var(--dim); }
+.node.green { border-color: var(--panel-line); color: var(--green-soft); }
+.arrow { text-align: center; color: var(--dim); font-size: 15px; padding: 4px 0; }
+.stat-line { font-size: 24px; }
+.stat-line b { color: var(--green); font-size: 30px; font-family: "SF Mono", Menlo, monospace; }
+
+/* ---------- journey ---------- */
+.journey { display: flex; gap: 34px; align-items: center; }
+.journey .chain { flex: 1.35; display: flex; flex-direction: column; }
+.zone { border-left: 3px solid; padding: 10px 0 10px 22px; margin-left: 4px; }
+.zone .zlabel {
+  font-size: 14px; letter-spacing: 0.22em; font-weight: 700; margin-bottom: 8px;
+  font-family: "SF Mono", Menlo, monospace;
+}
+.zone.js { border-color: var(--green); }
+.zone.js .zlabel { color: var(--green); }
+.zone.rust { border-color: #e0885a; }
+.zone.rust .zlabel { color: #e0885a; }
+.zone.gpu { border-color: #7bd0f7; }
+.zone.gpu .zlabel { color: #7bd0f7; }
+.zone .node { text-align: left; width: fit-content; min-width: 420px; margin-bottom: 8px; }
+.zone .node:last-child { margin-bottom: 0; }
+.journey aside { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+.journey aside .no { font-size: 26px; font-weight: 800; color: var(--text); }
+.journey aside .no s { color: var(--dim); font-weight: 600; }
+
+.bigsay { font-size: 52px; font-weight: 800; line-height: 1.4; color: var(--text); }
+
+/* ---------- bench ---------- */
+.bench { display: flex; flex-direction: column; gap: 18px; margin: 10px 0; }
+.bench-row { display: flex; align-items: center; gap: 20px; }
+.bench-name { width: 150px; font-size: 20px; font-family: "SF Mono", Menlo, monospace; color: var(--text); }
+.bench-track { flex: 1; background: rgba(147, 165, 184, 0.12); border-radius: 7px; height: 30px; overflow: hidden; }
+.bench-bar { display: block; height: 100%; border-radius: 7px; }
+.bench-bar.vapor { background: #3f7df6; }
+.bench-bar.vue { background: var(--green); }
+.bench-bar.solid { background: #cbd5e1; }
+.bench-val { width: 110px; text-align: right; font-size: 19px; font-family: "SF Mono", Menlo, monospace; color: var(--dim); }
+
+/* ---------- diagrams ---------- */
+.diagrams { display: flex; gap: 20px; align-items: stretch; }
+.diagrams .diagram {
+  flex: 1; min-width: 0; border: 1px solid var(--panel-line); border-radius: 14px;
+  background: var(--code-bg); padding: 12px;
+}
+
+/* ---------- vue logo ---------- */
+.vue-logo {
+  position: absolute; right: 92px; top: 50%; transform: translateY(-50%);
+  width: 230px; opacity: 0.95;
+}
+.vue-logo-sm { position: absolute; right: 92px; bottom: 60px; width: 56px; }

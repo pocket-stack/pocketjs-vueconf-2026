@@ -10,7 +10,7 @@ const ASSETS: Record<string, string> = {
   "vita-openstrike.mp4": `${R2}/pocketjs-real-ps-vita-bee7681c.mp4`,
 };
 
-const dir = new URL("../assets/videos/", import.meta.url);
+const dir = new URL("../public/videos/", import.meta.url);
 
 for (const [name, url] of Object.entries(ASSETS)) {
   const dest = new URL(name, dir);

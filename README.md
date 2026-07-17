@@ -1,31 +1,33 @@
 # pocketjs-vueconf-2026
 
-VueConf 2026 闪电分享 **《PocketJS 与 Vue Vapor 的嵌入式 GUI 探索》** 的幻灯片。
+VueConf 2026 闪电分享 **《PocketJS 与 Vue Vapor 的嵌入式 GUI 探索》** 的幻灯片，基于 [Slidev](https://sli.dev)。
 
-单文件 HTML deck，deck 本身用 Vue 3 驱动（`vendor/` 内已 vendor，**完全离线可放映**）；视频素材全部本地播放，会场断网不影响。
+视频素材全部本地播放，字体不走远程 provider——依赖装好之后离线可放映。
 
 ## 放映
 
 ```sh
+bun install
 bun scripts/fetch-assets.ts   # 首次：拉取真机视频（~115 MB，git 不追踪）
-open index.html               # file:// 直接放映，无需服务器
+bun run dev                   # 启动并自动打开浏览器
 ```
 
-| 键位 | 作用 |
-|---|---|
-| `←` `→` / 空格 | 翻页 |
-| `F` | 全屏 |
-| `Home` / `End` | 首页 / 末页 |
+- 键位：`←` `→` / 空格翻页，`f` 全屏，`o` 总览
+- 演讲者视图：地址栏访问 `/presenter`
+- 静态构建：`bun run build`（输出 `dist/`）
 
-## 素材
+## 素材（public/）
 
-| 文件（assets/videos/） | 内容 | 来源 |
+| 文件 | 内容 | 来源 |
 |---|---|---|
-| `hero-psp.mp4` | 基础 UI，PSP 真机 | pocketjs.dev 博客 |
-| `pocket-figma-psp.mp4` | Pocket Figma，PSP 真机 | R2 |
-| `vita-openstrike.mp4` | 全量 demo + OpenStrike，PS Vita 真机 | R2 |
-| `pocket-youtube-psp.mp4` | Pocket YouTube，PSP 真机 | R2 |
-| `../motions.gif` | motions 动效画廊（gif，已随仓库提交） | pocketjs 仓库 assets/screenshots/motions-53.gif |
+| `videos/hero-psp.mp4` | 基础 UI，PSP 真机 | pocketjs.dev 博客 |
+| `videos/pocket-figma-psp.mp4` | Pocket Figma，PSP 真机 | R2 |
+| `videos/vita-openstrike.mp4` | 全量 demo + OpenStrike，PS Vita 真机 | R2 |
+| `videos/pocket-youtube-psp.mp4` | Pocket YouTube，PSP 真机 | R2 |
+| `motions.gif` | motions 动效画廊（已随仓库提交） | pocketjs 仓库 assets/screenshots/motions-53.gif |
+| `flake-time-models.svg` `flake-histogram.svg` | 确定性页两张图 | pocketjs.dev 博文 *The UI Runtime That Can't Flake* 内联 SVG |
+| `bench-vapor-psp.svg` | 实测页数据原图（备查，slide 上是重画的条形图） | pocketjs PR #6 |
+| `vue.svg` | Vue 官方 logo | github.com/vuejs/art |
 
 可选升级：开场 hero 素材是 Solid 构建，用 `bun scripts/psp.ts hero-vue-vapor --framework=vue-vapor --release` 重录一版，"跑的就是 Vue"这句话就字面为真。
 
@@ -50,4 +52,4 @@ open index.html               # file:// 直接放映，无需服务器
 
 超时先砍第 10 页（Pocket Figma），再压缩第 9 页（动效）。
 
-实测数据来自 pocketjs PR #6（2026-07-04 修正 feature parity 后的 PPSSPP 基准），原图存在 `assets/bench-vapor-psp.svg`；第 13 页两张 SVG 提取自 pocketjs.dev 博文 *The UI Runtime That Can't Flake*。
+实测数据来自 pocketjs PR #6（2026-07-04 修正 feature parity 后的 PPSSPP 基准）。
