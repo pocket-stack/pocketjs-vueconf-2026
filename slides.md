@@ -38,7 +38,7 @@ title: 标题页
 
 <h1>PocketJS 与 <span class="accent">Vue Vapor</span> 的<br/>嵌入式 GUI 探索</h1>
 
-<p class="sub">雪碧 from PaperboyAI<br/>GitHub @doodlewind<br/>X@ewind_dev</p>
+<p class="sub">雪碧 from PaperboyAI<br/>GitHub @doodlewind<br/>X @ewind_dev</p>
 
 ---
 title: PocketJS 是什么
@@ -243,8 +243,8 @@ title: 虚拟时钟与输入磁带
 <h2>虚拟时钟与输入磁带</h2>
 
 <div class="diagrams">
-  <img class="diagram" src="/flake-time-models.svg" alt="sampled-time 与 frame-fold 两种运行时模型" />
-  <img class="diagram" src="/flake-histogram.svg" alt="墙钟与虚拟时钟各 60 次运行的直方图对比" />
+  <img class="diagram" src="/determinism-models.svg" alt="sampled-time 与 frame-fold 两种运行时模型" />
+  <img class="diagram" src="/determinism-histogram.svg" alt="墙钟与虚拟时钟各 60 次运行的直方图对比" />
 </div>
 
 <p class="sub">每帧一次事务：state[n+1] = F(state[n], input[n])，能改变世界的输入全部记在磁带上。同一个 UI 断言各跑 60 次：墙钟 22 种结果、通过 9 次；虚拟时钟 1 种结果、60/60。</p>

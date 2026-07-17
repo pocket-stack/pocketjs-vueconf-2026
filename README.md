@@ -25,7 +25,7 @@ bun run dev                   # 启动并自动打开浏览器
 | `videos/vita-openstrike.mp4` | 全量 demo + OpenStrike，PS Vita 真机 | R2 |
 | `videos/pocket-youtube-psp.mp4` | Pocket YouTube，PSP 真机 | R2 |
 | `motions.gif` | motions 动效画廊（已随仓库提交） | pocketjs 仓库 assets/screenshots/motions-53.gif |
-| `flake-time-models.svg` `flake-histogram.svg` | 确定性页两张图 | pocketjs.dev 博文 *The UI Runtime That Can't Flake* 内联 SVG |
+| `determinism-models.svg` `determinism-histogram.svg` | 确定性页两张图 | pocketjs.dev 博文 *The UI Runtime That Can't Flake* 内联 SVG |
 | `bench-vapor-psp.svg` | 实测页数据原图（备查，slide 上是重画的条形图） | pocketjs PR #6 |
 | `vue.svg` | Vue 官方 logo | github.com/vuejs/art |
 | `pocketjs.svg` | PocketJS logo | pocketjs 仓库 site/assets/favicon.svg |
