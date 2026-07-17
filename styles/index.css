@@ -1,3 +1,6 @@
+/* 禁用 g 键的 goto 搜索面板：焦点会陷在输入框里导致 g 关不掉，演讲中只添乱 */
+#slidev-goto-dialog { display: none !important; }
+
 :root {
   --green: #42b883;
   --green-soft: #6fd3a6;
