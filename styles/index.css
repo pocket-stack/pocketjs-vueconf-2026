@@ -148,6 +148,7 @@
 }
 
 /* ---------- logos ---------- */
+.corner-logo { position: absolute; left: 40px; top: 34px; width: 46px; z-index: 10; }
 .logo-pair {
   position: absolute; right: 92px; top: 50%; transform: translateY(-50%);
   display: flex; align-items: center; gap: 26px;

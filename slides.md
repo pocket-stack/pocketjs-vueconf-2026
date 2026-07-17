@@ -14,20 +14,6 @@ fonts:
   provider: none
 ---
 
-<div class="bleed-video">
-  <video autoplay muted loop playsinline>
-    <source src="/videos/hero-psp.mp4" type="video/mp4" />
-  </video>
-</div>
-<div class="caption">
-  <b>JSX + 细粒度响应式，跑在 2004 年的 PSP 上</b>
-  <span>真机实拍</span>
-</div>
-
----
-title: 标题页
----
-
 <div class="logo-pair">
   <img src="/pocketjs.svg" alt="PocketJS" />
   <span>×</span>
@@ -41,6 +27,19 @@ title: 标题页
 <p class="sub">雪碧 from PaperboyAI<br/>GitHub @doodlewind<br/>X @ewind_dev</p>
 
 ---
+title: Modern Web on PSP
+---
+
+<div class="bleed-video">
+  <video autoplay muted loop playsinline>
+    <source src="/videos/hero-psp.mp4" type="video/mp4" />
+  </video>
+</div>
+<div class="caption">
+  <b>Modern Web on PSP</b>
+</div>
+
+---
 title: PocketJS 是什么
 ---
 
@@ -50,17 +49,17 @@ title: PocketJS 是什么
 
 <div class="cards">
   <div class="card"><b>Modern Web DX</b><p>JSX + Tailwind 子集。秘诀：屏幕尺寸和应用数据在编译期已知，样式、字体、动画尽量全部提前烘焙好。</p></div>
-  <div class="card"><b>完全接管图形绘制</b><p>Rust core 负责布局与渲染，不走 OpenGL，直接裸接平台图形 API 生成显示列表。</p></div>
+  <div class="card"><b>完全接管图形绘制</b><p>Rust core 负责布局与渲染，不走 OpenGL，直接裸接平台图形 API。</p></div>
   <div class="card"><b>UI 框架层可插拔</b><p>Solid 与 <span class="accent">Vue Vapor</span> 无删减接入，走官方自定义渲染器接口，驱动同一棵 Rust UI 节点树。</p></div>
 </div>
 
 <p class="sub">目标机器只有 333 MHz 和 32 MB 内存，但要跑满 60 fps。</p>
 
 ---
-title: 掌机上的 Vue 应用
+title: 在 PSP 上写 Vue
 ---
 
-<p class="kicker">掌机上的 Vue 应用</p>
+<p class="kicker">在 PSP 上写 Vue</p>
 
 ```tsx
 import { onMounted, ref } from "vue";
@@ -83,7 +82,7 @@ export default function App() {
 mount(App);
 ```
 
-<p class="sub">不是"像 Vue"—— <span class="accent">import 的就是 vue</span>：真的 ref，真的 onMounted，真的 Vapor 编译。</p>
+<p class="sub">不是"像 Vue" <br/><span class="accent">import 的就是 vue</span>：真的 ref，真的 onMounted，真的 Vapor 编译。</p>
 
 ---
 title: 为什么是 Vapor
@@ -197,25 +196,6 @@ title: Pocket Figma
 </div>
 
 ---
-title: PSP 和 PS Vita
----
-
-<div class="split">
-  <div class="left">
-    <p class="kicker">PSP 和 PS Vita</p>
-    <h2>一份代码跑两台机器</h2>
-    <p class="sub">应用在 pocket.json 里声明依赖的 capability，宿主装载时对照自己实现的列表校验。两台机器分辨率和输入不同，差异由各自的宿主消化，应用代码不改。</p>
-  </div>
-  <div class="right">
-    <div class="video-frame ratio">
-      <video autoplay muted loop playsinline>
-        <source src="/videos/vita-openstrike.mp4" type="video/mp4" />
-      </video>
-    </div>
-  </div>
-</div>
-
----
 title: Pocket YouTube
 ---
 
@@ -235,12 +215,12 @@ title: Pocket YouTube
 </div>
 
 ---
-title: 虚拟时钟与输入磁带
+title: 基于帧的确定性时钟
 ---
 
 <p class="kicker">同一个运行时的另一面</p>
 
-<h2>虚拟时钟与输入磁带</h2>
+<h2>基于帧的确定性时钟</h2>
 
 <p class="sub">PocketJS 类似游戏引擎，强制每帧仅跑一次 JS 回调——<span class="accent">What if agent 不需要 60fps UI，只需要 2fps 呢？</span></p>
 
@@ -249,22 +229,22 @@ title: 虚拟时钟与输入磁带
   <img class="diagram" src="/determinism-histogram.svg" alt="墙钟与虚拟时钟各 60 次运行的直方图对比" />
 </div>
 
-<p class="sub">每帧一次事务：state[n+1] = F(state[n], input[n])，能改变世界的输入全部记在磁带上。同一个 UI 断言各跑 60 次：墙钟 22 种结果、通过 9 次；虚拟时钟 1 种结果、60/60。</p>
+<p class="sub">每帧一次事务：<code>state[n+1] = F(state[n], input[n])</code>，易于确定性模拟测试。<br/>同个异步业务各跑 60 次：浏览器 rAF 调度停止帧 22 种；帧虚拟时钟始终 1 种。</p>
 
 ---
-title: 掌机之外
+title: 潜在场景
 ---
 
-<img class="vue-logo-sm" src="/vue.svg" alt="Vue" />
+<!-- <img class="vue-logo-sm" src="/vue.svg" alt="Vue" /> -->
 
-<p class="kicker">掌机之外</p>
+<p class="kicker">Possibilities</p>
 
-<h2>这个运行时还能用在哪</h2>
+<h2>PocketJS 还可能用在哪</h2>
 
 <div class="cards">
-  <div class="card"><b>桌面嵌入 UI</b><p>同一个运行时已有 wgpu 桌面后端，可以作为 UI 层嵌进原生应用。</p></div>
-  <div class="card"><b>离屏视频渲染</b><p>帧序列是确定的，可以逐帧离屏渲染，直接当视频合成器用。</p></div>
-  <div class="card"><b>确定性测试</b><p>虚拟时钟加输入磁带，UI 测试跑在模拟世界里，重放逐字节一致。</p></div>
+  <div class="card"><b>桌面嵌入 UI</b><p>无需 WebView 即可用现代 DX 渲染带动画的桌面 widget</p></div>
+  <div class="card"><b>离屏内容渲染</b><p>可逐帧离屏渲染帧序列，作为类 Remotion 场景下无 Chromium 的视频合成器。</p></div>
+  <div class="card"><b>确定性测试</b><p>帧虚拟时钟加输入录制，大幅加速 E2E 并消除 flaky。</p></div>
 </div>
 
-<p class="sub"><span class="accent">pocketjs.dev</span><br/>github.com/pocket-stack</p>
+<p class="sub"><span class="accent">pocketjs.dev</span><br/>github.com/pocket-stack/pocketjs</p>
