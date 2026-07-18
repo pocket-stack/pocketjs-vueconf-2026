@@ -159,3 +159,9 @@
 .logo-pair img { width: 92px; }
 .logo-pair span { font-size: 28px; color: var(--dim); font-weight: 600; }
 .vue-logo-sm { position: absolute; right: 92px; bottom: 60px; width: 56px; }
+
+/* ---------- one more thing ---------- */
+.thanks { font-size: 48px; font-weight: 800; color: var(--green); margin-top: 4px; }
+.qr-card { background: #fff; border-radius: 18px; padding: 14px; width: 270px; margin: 0 auto; }
+.qr-card img { display: block; width: 100%; }
+.qr-cap { text-align: center; margin-top: 14px; }

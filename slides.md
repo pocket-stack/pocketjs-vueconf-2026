@@ -290,3 +290,22 @@ title: 潜在场景
 </div>
 
 <p class="sub"><span class="accent">pocketjs.dev</span><br/>github.com/pocket-stack/pocketjs</p>
+
+---
+title: One more thing
+---
+
+<div class="split">
+  <div class="left">
+    <p class="kicker">One more thing</p>
+    <h2>PocketJS 本身是 AI native 开发的</h2>
+    <p class="sub">一个作者加一个 coding agent，从零做到 release。全部真实开发 session 都有转录留档，正在整理成 deep wiki 站点，后续单独分享。</p>
+    <p class="thanks">Thanks!</p>
+  </div>
+  <div class="right">
+    <div class="qr-card">
+      <img src="/group-qr.png" alt="Pocket & AI Session 分享群二维码" />
+    </div>
+    <p class="sub qr-cap">扫码进「Pocket &amp; AI Session 分享群」<br/>站点上线后在群里分享</p>
+  </div>
+</div>

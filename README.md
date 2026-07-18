@@ -30,11 +30,12 @@ bun run dev                   # 启动并自动打开浏览器
 | `determinism-models.svg` `determinism-histogram.svg` | 确定性页两张图 | pocketjs.dev 博文 *The UI Runtime That Can't Flake* 内联 SVG |
 | `bench-vapor-psp.svg` | 实测页数据原图（备查，slide 上是重画的条形图） | pocketjs PR #6 |
 | `vue.svg` | Vue 官方 logo | github.com/vuejs/art |
+| `group-qr.png` | 「Pocket & AI Session 分享群」二维码（**当前为占位图**，指向 pocketjs.dev，放映前请替换成真实群码） | `bunx qrcode` 生成 |
 | `pocketjs.svg` | PocketJS logo | pocketjs 仓库 site/assets/favicon.svg |
 
 可选升级：开场 hero 素材是 Solid 构建，用 `bun scripts/psp.ts hero-vue-vapor --framework=vue-vapor --release` 重录一版，"跑的就是 Vue"这句话就字面为真。
 
-## 结构（14 页 · 目标 15 分钟）
+## 结构（15 页 · 目标 15 分钟）
 
 | # | 页 | 时间点 |
 |---|---|---|
@@ -51,7 +52,8 @@ bun run dev                   # 启动并自动打开浏览器
 | 11 | OpenStrike | 11:15 |
 | 12 | 计算器上的 PocketJS | 12:15 |
 | 13 | 基于帧的确定性时钟 | 13:15 |
-| 14 | 掌机之外 | 14:30 |
+| 14 | 掌机之外 | 14:10 |
+| 15 | One more thing（Sessions + 分享群） | 14:40 |
 
 超时先砍第 9 页（Pocket Figma），再压缩第 8 页（动效）。
 
