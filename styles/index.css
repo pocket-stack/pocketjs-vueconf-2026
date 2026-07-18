@@ -30,7 +30,7 @@
 
 
 .slidev-layout h1 {
-  font-size: 56px; line-height: 1.22; margin: 0; font-weight: 800;
+  font-size: 56px; line-height: 1.3 !important; margin: 0 0 18px !important; font-weight: 800;
   letter-spacing: 0.01em; color: var(--text);
 }
 .slidev-layout h2 {
@@ -151,7 +151,7 @@
 }
 
 /* ---------- logos ---------- */
-.corner-logo { position: absolute; left: 40px; top: 34px; width: 46px; z-index: 10; }
+.corner-logo { position: absolute; left: 28px; top: 34px; width: 34px; z-index: 10; opacity: 0.85; }
 .logo-pair {
   position: absolute; right: 92px; top: 72px;
   display: flex; align-items: center; gap: 20px;
