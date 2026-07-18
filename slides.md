@@ -111,7 +111,7 @@ title: 为什么是 Vapor
   </div>
 </div>
 
-<p class="stat-line">每帧只有 1 次 JS → Rust 的 FFI 机会</p>
+<p class="stat-line">Rust 每帧只进入 JS <b>1 次</b></p>
 
 ---
 title: count.value++ 的旅程
@@ -318,10 +318,16 @@ title: One more thing
     <p class="sub">单人加一群 coding agent，从零到 release 的全部真实开发 session 均转录留档，正在整理成 deep wiki 站点单独分享</p>
     <p class="thanks">Thanks!</p>
   </div>
-  <div class="right">
-    <div class="qr-card">
-      <img src="/group-qr.png" alt="Pocket & AI Session 分享群二维码" />
+  <div class="right omt-right">
+    <div class="omt-card">
+      <img class="omt-shot" src="/x-pocketjs.jpg" alt="X @pocket_js 时间线" />
+      <p class="sub omt-cap">X @pocket_js</p>
     </div>
-    <p class="sub qr-cap">扫码进「Pocket &amp; AI Session 分享群」<br/>站点上线后在群里分享</p>
+    <div class="omt-card">
+      <div class="qr-card">
+        <img src="/group-qr.png" alt="Pocket & AI Session 分享群二维码" />
+      </div>
+      <p class="sub omt-cap">扫码进「Pocket &amp; AI Session 分享群」<br/>站点上线后在群里分享</p>
+    </div>
   </div>
 </div>

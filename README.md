@@ -31,6 +31,7 @@ bun run dev                   # 启动并自动打开浏览器
 | `bench-vapor-psp.svg` | 实测页数据原图（备查，slide 上是重画的条形图） | pocketjs PR #6 |
 | `vue.svg` | Vue 官方 logo | github.com/vuejs/art |
 | `group-qr.png` | 「Pocket & AI Session 分享群」微信群码（**7 月 25 日前有效**，过期后需重新导出群码裁切替换） | 微信群码截图裁切 |
+| `x-pocketjs.jpg` | X @pocket_js 时间线手机截图（末页完整展示） | 本地截图压缩 |
 | `pocketjs.svg` | PocketJS logo | pocketjs 仓库 site/assets/favicon.svg |
 
 可选升级：开场 hero 素材是 Solid 构建，用 `bun scripts/psp.ts hero-vue-vapor --framework=vue-vapor --release` 重录一版，"跑的就是 Vue"这句话就字面为真。
