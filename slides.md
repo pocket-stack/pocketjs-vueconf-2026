@@ -276,7 +276,7 @@ title: 计算器上的 PocketJS
 title: 基于帧的确定性时钟
 ---
 
-<p class="kicker">同一个运行时的另一面</p>
+<p class="kicker">把 UI 当游戏引擎跑的意外收获</p>
 
 <h2>基于帧的确定性时钟</h2>
 
