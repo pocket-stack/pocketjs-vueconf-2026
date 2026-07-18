@@ -9,7 +9,7 @@
   --panel: rgba(53, 73, 94, 0.28);
   --panel-line: rgba(66, 184, 131, 0.22);
   --text: #e9f0f8;
-  --dim: #93a5b8;
+  --dim: #a2b3c6;
   --code-bg: #0e1626;
 }
 
@@ -43,6 +43,7 @@
   letter-spacing: 0.28em; text-transform: uppercase;
 }
 .sub { color: var(--dim); font-size: 22px; line-height: 1.75 !important; }
+.byline { color: #ccd7e4; }
 .sub-inline { color: var(--dim); font-size: 22px; }
 .accent { color: var(--green); }
 
@@ -137,10 +138,16 @@
 .bench-name { width: 150px; font-size: 20px; font-family: "SF Mono", Menlo, monospace; color: var(--text); }
 .bench-track { flex: 1; position: relative; background: rgba(147, 165, 184, 0.12); border-radius: 7px; height: 30px; overflow: hidden; }
 .bench-mark { position: absolute; top: 0; bottom: 0; left: 62%; border-left: 2px dashed rgba(233, 240, 248, 0.45); }
-.bench-bar { display: block; height: 100%; border-radius: 7px; }
-.bench-bar.vapor { background: #3f7df6; }
+.bench-track { display: flex; }
+.bench-bar { display: block; height: 100%; }
+.bench-bar.vapor-js { background: #9db9f8; }
+.bench-bar.vapor-flush { background: #3f7df6; }
 .bench-bar.vue { background: var(--green); }
 .bench-bar.solid { background: #cbd5e1; }
+.bench-legend { display: flex; align-items: center; gap: 10px; color: var(--dim); font-size: 17px; }
+.bench-legend .chip { width: 14px; height: 14px; border-radius: 4px; }
+.bench-legend .chip.vapor-js { background: #9db9f8; margin-left: 170px; }
+.bench-legend .chip.vapor-flush { background: #3f7df6; margin-left: 18px; }
 .bench-val { width: 110px; text-align: right; font-size: 19px; font-family: "SF Mono", Menlo, monospace; color: var(--dim); }
 
 /* ---------- diagrams ---------- */

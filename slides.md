@@ -24,7 +24,7 @@ fonts:
 
 <h1>PocketJS 与 <span class="accent">Vue Vapor</span> 的<br/>嵌入式 GUI 探索</h1>
 
-<p class="sub">雪碧 from PaperboyAI<br/>GitHub @doodlewind<br/>X @ewind_dev</p>
+<p class="sub byline">雪碧 from PaperboyAI<br/>GitHub @doodlewind<br/>X @ewind_dev / @pocket_js</p>
 
 ---
 title: Modern Web on PSP
@@ -152,9 +152,14 @@ title: 实测
 <h2>PSP 上每帧 JS 侧开销：Vapor、Vue、Solid</h2>
 
 <div class="bench">
-  <div class="bench-row"><span class="bench-name">Vue Vapor</span><span class="bench-track"><span class="bench-bar vapor" style="width:8%"></span><span class="bench-mark"></span></span><span class="bench-val">2.1 ms</span></div>
+  <div class="bench-row"><span class="bench-name">Vue Vapor</span><span class="bench-track"><span class="bench-bar vapor-js" style="width:1.5%"></span><span class="bench-bar vapor-flush" style="width:6.3%"></span><span class="bench-mark"></span></span><span class="bench-val">2.1 ms</span></div>
   <div class="bench-row"><span class="bench-name">Vue</span><span class="bench-track"><span class="bench-bar vue" style="width:100%"></span><span class="bench-mark"></span></span><span class="bench-val">26.9 ms</span></div>
   <div class="bench-row"><span class="bench-name">Solid</span><span class="bench-track"><span class="bench-bar solid" style="width:1%"></span><span class="bench-mark"></span></span><span class="bench-val">0.3 ms</span></div>
+</div>
+
+<div class="bench-legend">
+  <span class="chip vapor-js"></span>帧回调逻辑 0.4 ms
+  <span class="chip vapor-flush"></span>microtask flush 1.7 ms
 </div>
 
 <p class="sub">
