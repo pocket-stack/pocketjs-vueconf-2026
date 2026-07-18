@@ -112,9 +112,21 @@
 .stat-line { font-size: 24px; }
 .stat-line b { color: var(--green); font-size: 30px; font-family: "SF Mono", Menlo, monospace; }
 
-/* ---------- journey ---------- */
-.journey { display: flex; gap: 34px; align-items: center; }
-.journey .chain { flex: 1.35; display: flex; flex-direction: column; }
+/* ---------- pipeline (count.value++ journey) ---------- */
+.pipeline { display: flex; flex-direction: column; gap: 16px; }
+.pipeline .flow-row { display: flex; align-items: stretch; gap: 12px; }
+.pipeline .flow-row .node { text-align: left; min-width: 0; font-size: 16px; padding: 10px 14px; white-space: nowrap; }
+.pipeline .flow-row .node .hint { white-space: normal; }
+.pipeline .node .hint {
+  display: block; margin-top: 6px; font-size: 13.5px; color: var(--dim);
+  font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+}
+.pipeline .arrow-h { align-self: center; color: var(--dim); font-size: 15px; white-space: nowrap; }
+.boundary {
+  border: 1px dashed rgba(147, 165, 184, 0.45); border-radius: 10px;
+  padding: 8px 18px; color: var(--dim); font-size: 16.5px; width: fit-content;
+  margin-left: 26px;
+}
 .zone { border-left: 3px solid; padding: 10px 0 10px 22px; margin-left: 4px; }
 .zone .zlabel {
   font-size: 14px; letter-spacing: 0.22em; font-weight: 700; margin-bottom: 8px;
@@ -126,11 +138,7 @@
 .zone.rust .zlabel { color: #e0885a; }
 .zone.gpu { border-color: #7bd0f7; }
 .zone.gpu .zlabel { color: #7bd0f7; }
-.zone .node { text-align: left; width: fit-content; min-width: 420px; margin-bottom: 8px; }
-.zone .node:last-child { margin-bottom: 0; }
-.journey aside { flex: 1; display: flex; flex-direction: column; gap: 16px; }
-.journey aside .no { font-size: 26px; font-weight: 800; color: var(--text); }
-.journey aside .no s { color: var(--dim); font-weight: 600; }
+.zone .node { text-align: left; }
 
 /* ---------- bench ---------- */
 .bench { display: flex; flex-direction: column; gap: 18px; margin: 10px 0; }

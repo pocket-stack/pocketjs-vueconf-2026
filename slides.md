@@ -119,28 +119,39 @@ title: count.value++ 的旅程
 
 <p class="kicker">一次 count.value++ 的旅程</p>
 
-<div class="journey">
-  <div class="chain">
-    <div class="zone js">
-      <div class="zlabel">JAVASCRIPT</div>
-      <div class="node">ref 变更 → Vapor effect 触发</div>
-      <div class="node">setProp(节点镜像, "text", …)</div>
-    </div>
-    <div class="zone rust">
-      <div class="zlabel">RUST CORE</div>
-      <div class="node">指令流 ops → 布局 / 二进制样式表</div>
-    </div>
-    <div class="zone gpu">
-      <div class="zlabel">GPU</div>
-      <div class="node">sceGu 显示列表 → 屏幕</div>
+<div class="pipeline">
+  <div class="zone js">
+    <div class="zlabel">JAVASCRIPT —— 帧回调 + microtask flush</div>
+    <div class="flow-row">
+      <div class="node">count.value++ ×N</div>
+      <div class="arrow-h">调度器合并 →</div>
+      <div class="node">Vapor effect 跑一次</div>
+      <div class="arrow-h">写两处 →</div>
+      <div class="node">JS 节点镜像<span class="hint">读操作全在 JS 侧</span></div>
+      <div class="node green">ui.setText(7, "Count: 3")<span class="hint">同步 C 调用，只递标量</span></div>
     </div>
   </div>
-  <aside>
-    <div class="no">没有 <s>虚拟 DOM</s></div>
-    <div class="no">没有 <s>diff</s></div>
-    <div class="no">没有 <s>DOM 本身</s></div>
-    <p class="sub">一次状态变更 = 一条精确的写指令。</p>
-  </aside>
+  <div class="boundary">JS → Rust 边界：写入 = 同一帧内多次廉价小调用；读取 = 0 次；Rust 进入 JS = 每帧仅 1 次</div>
+  <div class="zone rust">
+    <div class="zlabel">RUST CORE —— 每帧只跑一次，与写入次数无关</div>
+    <div class="flow-row">
+      <div class="node">原生节点树</div>
+      <div class="arrow-h">→</div>
+      <div class="node">tick：布局 + 动画<span class="hint">样式查编译期烘焙的 styles.bin</span></div>
+      <div class="arrow-h">→</div>
+      <div class="node green">DrawList：扁平 u32 指令流<span class="hint">RECT / GLYPH_RUN / TEX_QUAD / SCISSOR，CPU 侧已完成裁剪</span></div>
+    </div>
+  </div>
+  <div class="zone gpu">
+    <div class="zlabel">GPU —— 每帧一次</div>
+    <div class="flow-row">
+      <div class="node">ge.rs 逐 word 译成 sceGu 调用</div>
+      <div class="arrow-h">→</div>
+      <div class="node">GE 显示列表<span class="hint">GPU 的命令缓冲，DMA 直接消费</span></div>
+      <div class="arrow-h">→</div>
+      <div class="node">屏幕</div>
+    </div>
+  </div>
 </div>
 
 ---
