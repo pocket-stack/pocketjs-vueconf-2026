@@ -301,8 +301,8 @@ title: 潜在场景
     <h2>PocketJS 还可能用在哪</h2>
     <div class="cards stack">
       <div class="card"><b>桌面嵌入 UI</b><p>无需 WebView 即可用现代 DX 渲染带动画的桌面 widget</p></div>
-      <div class="card"><b>离屏内容渲染</b><p>可逐帧离屏渲染帧序列，作为类 Remotion 场景下无 Chromium 的视频合成器。</p></div>
-      <div class="card"><b>确定性测试</b><p>帧虚拟时钟加输入录制，大幅加速 E2E 并消除 flaky。</p></div>
+      <div class="card"><b>离屏内容渲染</b><p>可逐帧离屏渲染帧序列，作为 Remotion 场景下无 Chromium 的视频合成器</p></div>
+      <div class="card"><b>确定性测试</b><p>帧虚拟时钟加输入录制，大幅加速 E2E 并消除 flaky</p></div>
     </div>
     <p class="sub"><span class="accent">pocketjs.dev</span><br/>github.com/pocket-stack/pocketjs<br/>欢迎关注与 star 支持！</p>
   </div>
