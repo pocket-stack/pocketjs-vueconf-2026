@@ -30,7 +30,7 @@ bun run dev                   # 启动并自动打开浏览器
 | `determinism-models.svg` `determinism-histogram.svg` | 确定性页两张图 | pocketjs.dev 博文 *The UI Runtime That Can't Flake* 内联 SVG |
 | `bench-vapor-psp.svg` | 实测页数据原图（备查，slide 上是重画的条形图） | pocketjs PR #6 |
 | `vue.svg` | Vue 官方 logo | github.com/vuejs/art |
-| `group-qr.png` | 「Pocket & AI Session 分享群」二维码（**当前为占位图**，指向 pocketjs.dev，放映前请替换成真实群码） | `bunx qrcode` 生成 |
+| `group-qr.png` | 「Pocket & AI Session 分享群」微信群码（**7 月 25 日前有效**，过期后需重新导出群码裁切替换） | 微信群码截图裁切 |
 | `pocketjs.svg` | PocketJS logo | pocketjs 仓库 site/assets/favicon.svg |
 
 可选升级：开场 hero 素材是 Solid 构建，用 `bun scripts/psp.ts hero-vue-vapor --framework=vue-vapor --release` 重录一版，"跑的就是 Vue"这句话就字面为真。

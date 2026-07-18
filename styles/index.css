@@ -162,6 +162,6 @@
 
 /* ---------- one more thing ---------- */
 .thanks { font-size: 48px; font-weight: 800; color: var(--green); line-height: 1.25 !important; margin-top: 12px; }
-.qr-card { background: #fff; border-radius: 18px; padding: 14px; width: 270px; margin: 0 auto; }
+.qr-card { background: #191919; border: 1px solid var(--panel-line); border-radius: 18px; padding: 12px; width: 300px; margin: 0 auto; }
 .qr-card img { display: block; width: 100%; }
 .qr-cap { text-align: center; margin-top: 14px; }
