@@ -24,7 +24,7 @@ fonts:
 
 <h1>PocketJS 与 <span class="accent">Vue Vapor</span> 的<br/>嵌入式 GUI 探索</h1>
 
-<p class="sub byline">雪碧 from PaperboyAI<br/>GitHub @doodlewind<br/>X @ewind_dev / @pocket_js</p>
+<p class="sub byline">雪碧 from PaperboyAI<br/>GitHub @doodlewind</p>
 
 ---
 title: Modern Web on PSP
