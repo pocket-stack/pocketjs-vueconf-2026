@@ -24,6 +24,8 @@ bun run dev                   # 启动并自动打开浏览器
 | `videos/pocket-figma-psp.mp4` | Pocket Figma，PSP 真机 | R2 |
 | `videos/vita-openstrike.mp4` | 全量 demo + OpenStrike，PS Vita 真机 | R2 |
 | `videos/pocket-youtube-psp.mp4` | Pocket YouTube，PSP 真机 | R2 |
+| `videos/openstrike-psp.mp4` | OpenStrike + DevTools 组件树，PSP 真机 | 本地实拍，`bun scripts/import-local-assets.ts` 转码 |
+| `videos/ti-nspire.mp4` | Notifications demo，TI-Nspire CX II 计算器 | 本地实拍，同上 |
 | `motions.gif` | motions 动效画廊（已随仓库提交） | pocketjs 仓库 assets/screenshots/motions-53.gif |
 | `determinism-models.svg` `determinism-histogram.svg` | 确定性页两张图 | pocketjs.dev 博文 *The UI Runtime That Can't Flake* 内联 SVG |
 | `bench-vapor-psp.svg` | 实测页数据原图（备查，slide 上是重画的条形图） | pocketjs PR #6 |
@@ -32,22 +34,24 @@ bun run dev                   # 启动并自动打开浏览器
 
 可选升级：开场 hero 素材是 Solid 构建，用 `bun scripts/psp.ts hero-vue-vapor --framework=vue-vapor --release` 重录一版，"跑的就是 Vue"这句话就字面为真。
 
-## 结构（12 页 · 目标 15 分钟）
+## 结构（14 页 · 目标 15 分钟）
 
 | # | 页 | 时间点 |
 |---|---|---|
 | 1 | 标题 | 0:00 |
 | 2 | 真机视频（Modern Web on PSP） | 0:30 |
 | 3 | PocketJS 是什么 | 1:30 |
-| 4 | 掌机上的 Vue 应用（代码） | 3:00 |
-| 5 | 为什么是 Vapor（每帧一次 FFI） | 4:30 |
-| 6 | 一次 count.value++ 的旅程 | 6:30 |
-| 7 | 实测：Vapor vs Vue vs Solid | 8:00 |
-| 8 | 动效 | 9:30 |
-| 9 | Pocket Figma | 10:30 |
-| 10 | Pocket YouTube | 11:30 |
-| 11 | 基于帧的确定性时钟 | 13:00 |
-| 12 | 掌机之外 | 14:30 |
+| 4 | 掌机上的 Vue 应用（代码） | 2:45 |
+| 5 | 为什么是 Vapor（每帧一次 FFI） | 4:00 |
+| 6 | 一次 count.value++ 的旅程 | 5:30 |
+| 7 | 实测：Vapor vs Vue vs Solid | 7:00 |
+| 8 | 动效 | 8:15 |
+| 9 | Pocket Figma | 9:15 |
+| 10 | Pocket YouTube | 10:15 |
+| 11 | OpenStrike | 11:15 |
+| 12 | 计算器上的 PocketJS | 12:15 |
+| 13 | 基于帧的确定性时钟 | 13:15 |
+| 14 | 掌机之外 | 14:30 |
 
 超时先砍第 9 页（Pocket Figma），再压缩第 8 页（动效）。
 

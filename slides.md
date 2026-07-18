@@ -219,6 +219,44 @@ title: Pocket YouTube
 </div>
 
 ---
+title: OpenStrike
+---
+
+<div class="split">
+  <div class="left">
+    <p class="kicker">OpenStrike</p>
+    <h2>3D 射击游戏，PSP 真机 60 fps</h2>
+    <p class="sub">pocket3d 渲染 BSP 关卡，直接生成 sceGu 显示列表；HUD 是 PocketJS 组件——后面的 Mac 连着 DevTools，实时查看真机上的组件树。</p>
+  </div>
+  <div class="right">
+    <div class="video-frame ratio">
+      <video autoplay muted loop playsinline>
+        <source src="/videos/openstrike-psp.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+</div>
+
+---
+title: 计算器上的 PocketJS
+---
+
+<div class="split">
+  <div class="left">
+    <p class="kicker">还能再小</p>
+    <h2>计算器上的 PocketJS</h2>
+    <p class="sub">同一个 Notifications demo，跑在 TI-Nspire CX II 图形计算器上：320 × 240 屏幕，方向键移动焦点，ENTER 消除通知。</p>
+  </div>
+  <div class="right">
+    <div class="video-frame square">
+      <video autoplay muted loop playsinline>
+        <source src="/videos/ti-nspire.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+</div>
+
+---
 title: 基于帧的确定性时钟
 ---
 
