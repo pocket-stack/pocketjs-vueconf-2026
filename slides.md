@@ -316,7 +316,6 @@ title: One more thing
     <p class="kicker">One more thing</p>
     <h2>PocketJS 本身是 AI native 开发的</h2>
     <p class="sub">单人加一群 coding agent，从零到 release 的全部真实开发 session 均转录留档，正在整理成 deep wiki 站点单独分享</p>
-    <p class="sub repo-line"><span class="accent">github.com/pocket-stack/pocketjs</span></p>
     <p class="thanks">Thanks!</p>
   </div>
   <div class="right omt-right">
