@@ -295,17 +295,24 @@ title: 潜在场景
 
 <!-- <img class="vue-logo-sm" src="/vue.svg" alt="Vue" /> -->
 
-<p class="kicker">Possibilities</p>
-
-<h2>PocketJS 还可能用在哪</h2>
-
-<div class="cards">
-  <div class="card"><b>桌面嵌入 UI</b><p>无需 WebView 即可用现代 DX 渲染带动画的桌面 widget</p></div>
-  <div class="card"><b>离屏内容渲染</b><p>可逐帧离屏渲染帧序列，作为类 Remotion 场景下无 Chromium 的视频合成器。</p></div>
-  <div class="card"><b>确定性测试</b><p>帧虚拟时钟加输入录制，大幅加速 E2E 并消除 flaky。</p></div>
+<div class="split wide-left">
+  <div class="left">
+    <p class="kicker">Possibilities</p>
+    <h2>PocketJS 还可能用在哪</h2>
+    <div class="cards stack">
+      <div class="card"><b>桌面嵌入 UI</b><p>无需 WebView 即可用现代 DX 渲染带动画的桌面 widget</p></div>
+      <div class="card"><b>离屏内容渲染</b><p>可逐帧离屏渲染帧序列，作为类 Remotion 场景下无 Chromium 的视频合成器。</p></div>
+      <div class="card"><b>确定性测试</b><p>帧虚拟时钟加输入录制，大幅加速 E2E 并消除 flaky。</p></div>
+    </div>
+    <p class="sub"><span class="accent">pocketjs.dev</span><br/>github.com/pocket-stack/pocketjs<br/>欢迎关注与 star 支持！</p>
+  </div>
+  <div class="right">
+    <div class="omt-card">
+      <img class="omt-shot" src="/x-pocketjs.jpg" alt="X @pocket_js 时间线" />
+      <p class="sub omt-cap">X @pocket_js</p>
+    </div>
+  </div>
 </div>
-
-<p class="sub"><span class="accent">pocketjs.dev</span><br/>github.com/pocket-stack/pocketjs</p>
 
 ---
 title: One more thing
@@ -319,10 +326,6 @@ title: One more thing
     <p class="thanks">Thanks!</p>
   </div>
   <div class="right omt-right">
-    <div class="omt-card">
-      <img class="omt-shot" src="/x-pocketjs.jpg" alt="X @pocket_js 时间线" />
-      <p class="sub omt-cap">X @pocket_js</p>
-    </div>
     <div class="omt-card">
       <div class="qr-card">
         <img src="/group-qr.png" alt="Pocket & AI Session 分享群二维码" />
